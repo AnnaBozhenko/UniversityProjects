@@ -24,7 +24,7 @@ create table coursebook (
 
 
 create table author_coursebook (
-	cb_ISBN bigint unique not null,
+	cb_ISBN bigint not null,
 	author_id int not null,
 	edition int,
 	circulation int
@@ -39,6 +39,9 @@ alter table author
 	
 alter table coursebook
 	add constraint pk_coursebook primary key (cb_ISBN);
+	
+alter table author_coursebook
+	add constraint pk_author_coursebook primary key (cb_ISBN, author_id);
 	
 -- defining foreign keys
 
