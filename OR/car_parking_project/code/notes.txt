@@ -1,0 +1,18 @@
+1. change mark_region function: 
+    a. make rectangle resizing lke in Paint;
+    b. erase previous drawn rectangles when button is up 
+2. create mark_regions function
+3. change binary occupancy map function:
+    a. handle cases when trying to put object's location-pixel out of bounds of parking zone
+4. create direction map:
+    a. define representation. Ideas: to each pixel pin either ['Left', 'Right', 'Up', 'Down']
+       or cordinates of neighbour pixel to which movement is allowed
+5. create trajectory function, which finds the nearest path to the parking slot according to direction rules
+    a. ideas: A* algorythm
+    b. 4 side directions: right, left, up, down
+    c. take into account model-vehicle gabarites to move on tparking tracks (trajectory function)
+6. find entrance-slot path for each slot 
+7. find slot-pedestrian-exit path for each slot
+8. find slot-vehicle-exit path for each slot
+9. normalise above 3 paths for each slot and set these 3 norms for each slot
+ 
