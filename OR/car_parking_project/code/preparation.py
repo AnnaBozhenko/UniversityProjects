@@ -15,83 +15,6 @@ def get_dimension(ul, br):
     return abs(ul[0] - br[0]), abs(ul[1] - br[1])
 
 
-def define_rectangle(caption):
-    pygame.init()
-    clock = pygame.time.Clock()
-    
-    upper_left, bottom_right = None, None
-    ul, br = None, None
-    screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_LENGTH))
-    pygame.display.set_caption(caption)
-    bg = pygame.image.load(MAP_PATH).convert()
-    screen.blit(bg, (0, 0))
-    pygame.display.flip()
-    running = True
-
-    while running:
-        clock.tick(60)
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                running = False
-                break
-            elif event.type == pygame.MOUSEBUTTONDOWN:
-                if ul is None:
-                    ul = event.pos
-                else:
-                    br = event.pos
-                    l, t, w, h = ul[0],  ul[1],  abs(br[0] - ul[0]),  abs(br[1] - ul[1])
-                    rectangle = pygame.Rect(l, t, w, h)
-                    screen.blit(bg, (0, 0))
-                    pygame.draw.rect(screen, BLUE, rectangle)
-                    pygame.display.flip()
-                    upper_left = ul
-                    bottom_right = br
-                    ul = None
-                    br = None
-
-    return (upper_left, bottom_right)
-
-
-def define_rectangles(caption):
-    pygame.init()
-    clock = pygame.time.Clock()
-    screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_LENGTH))
-    pygame.display.set_caption(caption)
-
-    rectangles = []
-    running = True
-    upper_left, bottom_right = None, None
-    
-    bg = pygame.image.load(MAP_PATH).convert()
-    screen.blit(bg, (0, 0))
-    pygame.display.flip()
-
-    while running:
-        clock.tick(60)
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                running = False
-                break
-            elif event.type == pygame.MOUSEBUTTONDOWN:
-                if upper_left is None:
-                    upper_left = event.pos
-                else:
-                    bottom_right = event.pos
-                    l = upper_left[0]
-                    t = upper_left[1]
-                    w = abs(bottom_right[0] - upper_left[0])
-                    h = abs(bottom_right[1] - upper_left[1])
-                    rectangle = pygame.Rect(l, t, w, h)
-                    pygame.draw.rect(screen, BLUE, rectangle)
-                    pygame.display.update(rectangle)
-                    rectangles.append([upper_left, bottom_right])
-                    upper_left = None
-                    bottom_right = None
-    return rectangles 
-
-
 def define_objects(object_width, object_length, caption):
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_LENGTH))
@@ -113,21 +36,24 @@ def define_objects(object_width, object_length, caption):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-                pygame.quit()
                 break
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
                     pos = pygame.mouse.get_pos()
                     objects_locations.append([(pos[0], pos[1]), (pos[0] + r.width, pos[1] + r.height)])
+                    pygame.draw.rect(bg, BLUE, r)
+                    pygame.display.flip()
                 elif event.button == 3:
                     w = r.width
                     r.width = r.height
                     r.height = w
-        if running:
-            r.topleft = pygame.mouse.get_pos()
-            screen.blit(bg, (0, 0))
-            pygame.draw.rect(screen, BLUE, r)
-            pygame.display.update()
+            if event.type == pygame.MOUSEMOTION:
+                r.topleft = pygame.mouse.get_pos()
+                screen.blit(bg, (0, 0))
+                pygame.draw.rect(screen, BLUE, r)
+                pygame.display.flip()
+    
+    pygame.quit()
     return objects_locations
 
 
@@ -187,6 +113,52 @@ def mark_region(caption):
     screen.blit(bg, (0, 0))
     pygame.display.flip()
     running = True
+    pressing = False    
+
+    while running:
+        clock.tick(60)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+                break
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                upper_left = event.pos
+                pressing = True
+            elif pygame.mouse.get_pressed() == (1, 0, 0):
+                bottom_right = event.pos
+                # draw intermidiate rectangle
+                screen.blit(bg, (0, 0))
+                w, l = get_dimension(upper_left, bottom_right)
+                pygame.draw.rect(screen, BLUE, pygame.Rect(upper_left[0], upper_left[1], w, l))
+                pygame.display.flip()
+            elif event.type == pygame.MOUSEBUTTONUP and pressing:
+                bottom_right = event.pos
+
+                # draw final rectangle
+                screen.blit(bg, (0, 0))
+                w, l = get_dimension(upper_left, bottom_right)
+                pygame.draw.rect(screen, BLUE, pygame.Rect(upper_left[0], upper_left[1], w, l))
+                pygame.display.flip()
+
+                pressing = False            
+
+    pygame.quit()
+    return upper_left, bottom_right    
+
+
+def mark_regions(caption):
+    pygame.init()
+    screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_LENGTH))
+
+    pygame.display.set_caption(caption)
+    clock = pygame.time.Clock()
+
+    coords = []
+    upper_left, bottom_right = None, None
+    bg = pygame.image.load(MAP_PATH).convert()
+    screen.blit(bg, (0, 0))
+    pygame.display.flip()
+    running = True
     pressing = False
 
     while running:
@@ -196,26 +168,27 @@ def mark_region(caption):
                 running = False
                 break
             elif event.type == pygame.MOUSEBUTTONDOWN:
-                if event.button == 1:
-                    upper_left = event.pos
-                    pressing = True
+                upper_left = event.pos
+                pressing = True
+            elif pygame.mouse.get_pressed() == (1, 0, 0):
+                bottom_right = event.pos
+                # draw intermidiate rectangle
+                screen.blit(bg, (0, 0))
+                w, l = get_dimension(upper_left, bottom_right)
+                pygame.draw.rect(screen, BLUE, pygame.Rect(upper_left[0], upper_left[1], w, l))
+                pygame.display.flip()
             elif event.type == pygame.MOUSEBUTTONUP and pressing:
                 bottom_right = event.pos
+                coords.append([upper_left, bottom_right])
+                # draw final rectangle
+                screen.blit(bg, (0, 0))
+                w, l = get_dimension(upper_left, bottom_right)
+                pygame.draw.rect(bg, BLUE, pygame.Rect(upper_left[0], upper_left[1], w, l))
+                # pygame.display.flip()
+
                 pressing = False
-            if  pygame.mouse.get_pressed() == (1, 0, 0):
-                bottom_right = event.pos
-               
-        if upper_left is not None and bottom_right is not None:
-            screen.blit(bg, (0, 0))
-            w, l = get_dimension(upper_left, bottom_right)
-            pygame.draw.rect(bg, BLUE, pygame.Rect(upper_left, (w, l)))
-            pygame.display.flip()
-
     pygame.quit()
-    return upper_left, bottom_right    
-
-
-
+    return coords
 
 
 def main():
@@ -244,21 +217,19 @@ def main():
     v_exit_location = mark_region("Define exit (for vehicles):")
 
     # step 6: define pedestrian exits
-    p_exit_ul, p_exit_br = mark_region("Define size for pedestrian entrance:")
-    p_exit_width, p_exit_length = get_dimension(p_exit_ul, p_exit_br)
-    p_exits_locations = define_objects("Define pedestrian exits locations:")
+    p_exits_locations = mark_regions("Define pedestrian exits locations:")
 
     # step 7: define walls and other obstacles
-    walls_locations = define_rectangles("Define walls(obstacles) locations:")
+    walls_locations = mark_regions("Define walls(obstacles) locations:")
 
     # step 8: define road directions
     arrow_up_char = '\u2191'
     arrow_down_char = '\u2193'
     # to right
-    right_movement = define_rectangles("<- To left <-")
-    left_movement = define_rectangles("-> To right ->")
-    up_movement = define_rectangles(f"{arrow_up_char} Up {arrow_up_char}")
-    down_movement = define_rectangles(f"{arrow_down_char} Down {arrow_down_char}")
+    right_movement = mark_regions("<- To left <-")
+    left_movement = mark_regions("-> To right ->")
+    up_movement = mark_regions(f"{arrow_up_char} Up {arrow_up_char}")
+    down_movement = mark_regions(f"{arrow_down_char} Down {arrow_down_char}")
     
     # step 9: initialize parking object with gathered arguments
     parking = Parking((parking_width, parking_length),
@@ -333,4 +304,6 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    c = define_objects(15, 30, "Define regions")
+    [print(coord) for coord in c]
+    # main()
