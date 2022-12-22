@@ -1,9 +1,5 @@
-1.+ change mark_region function: 
-    a. make rectangle resizing lke in Paint;
-    b. erase previous drawn rectangles when button is up 
-2.+ create mark_regions function
 3. change binary occupancy map function:
-    a. handle cases when trying to put object's location-pixel out of bounds of parking zone
+    a. think about representation: array-like, starting from n = 0 or pixel-like, starting from n >= 0
 4. create direction map:
     a. define representation. Ideas: to each pixel pin either ['Left', 'Right', 'Up', 'Down']
        or cordinates of neighbour pixel to which movement is allowed
