@@ -31,4 +31,8 @@ def fit_image_to(new_width, new_length, image_name, new_image_name):
         print(im.size)
         im.save(new_image_name)
             
-
+            
+def crop_image(image_name, new_image_coords, new_image_name):
+    with Image.open(image_name) as im:
+        im = im.crop(new_image_coords)
+        im.save(new_image_name)
