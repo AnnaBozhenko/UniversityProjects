@@ -231,6 +231,20 @@ def fit_figures_inside(domain_coords, figures_coords):
     return fitted_figures
 
 
+def shift_point(coordinate, x_shift, y_shift):
+    """returns new coordinates of the given point (x0, y0):  (x0 - x_shift, y0 - y_shift)"""
+    return (coordinate[0] - x_shift, coordinate[1] - y_shift)
+
+
+def shift_coordinate(coodinates, x_shift, y_shift):
+    """returns: [(upper_left - (x_shift, y_shift), bottom_right - (x_shift, y_shift))]"""
+    return [shift_point(point, x_shift, y_shift) for point in coodinates]
+    
+
+def shift_coordinates_array(coordinates_array, x_shift, y_shift):
+    return [shift_coordinate(coord, x_shift, y_shift) for coord in coordinates_array]
+
+
 def main():
     # -------- Setting parking object ---------   
     # step 1: define parking size
@@ -238,7 +252,9 @@ def main():
     if parking_location is None:
         print("Defining parking size failed.")
         return None
-   
+    # step 1.2: define shift coordiantes(x_shift, y_shift)
+    x_shift, y_shift = parking_location[0]
+
     # step 2: define parking slot size
     slot_location = mark_region("Define slot size:")
     if slot_location is None:
@@ -256,6 +272,7 @@ def main():
     if slots_locations == []:
         print("Failed to set parking slots locations.")
         return None
+    slots_locations = shift_coordinates_array(slots_locations, x_shift, y_shift)
 
     # step 4: define entrance location
     v_entrance_location = mark_region("Define entrance (for vehicles):")
@@ -263,6 +280,7 @@ def main():
     if v_entrance_location is None:
         print("Failed to set vehicles entrance location.")
         return None
+    v_entrance_location = shift_coordinate(v_entrance_location, x_shift, y_shift)
 
     # step 5: define exit location
     v_exit_location = mark_region("Define exit (for vehicles):")
@@ -270,6 +288,7 @@ def main():
     if v_exit_location is None:
         print("Failed to set vehicles exit location.")
         return None
+    v_exit_location = shift_coordinate(v_exit_location, x_shift, y_shift)
 
     # step 6: define pedestrian exits
     p_exits_locations = mark_regions("Define pedestrian exits locations:")
@@ -277,10 +296,12 @@ def main():
     if p_exits_locations == []:
         print("Failed to set pedestrians exit locations.")
         return None
+    p_exits_locations = shift_coordinates_array(p_exits_locations, x_shift, y_shift) 
 
     # step 7: define walls and other obstacles
     walls_locations = mark_regions("Define walls(obstacles) locations:")
     walls_locations = fit_figures_inside(parking_location, walls_locations)
+    walls_locations = shift_coordinates_array(walls_locations, x_shift, y_shift)
 
     # step 8: define road directions
     arrow_up_char = '\u2191'
@@ -295,6 +316,10 @@ def main():
     down_movement_areas = fit_figures_inside(parking_location, down_movement_areas)
     if right_movement_areas == [] or left_movement_areas == [] or up_movement_areas == [] or down_movement_areas == []:
         print("Failed to set up movements areas.")
+    right_movement_areas = shift_coordinates_array(right_movement_areas, x_shift, y_shift)
+    left_movement_areas = shift_coordinates_array(left_movement_areas, x_shift, y_shift)
+    up_movement_areas = shift_coordinates_array(up_movement_areas, x_shift, y_shift)
+    down_movement_areas = shift_coordinates_array(down_movement_areas, x_shift, y_shift)
     
     # step 9: initialize parking object with gathered arguments
     parking = Parking(parking_location,
