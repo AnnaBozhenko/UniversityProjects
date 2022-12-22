@@ -3,26 +3,27 @@ from PIL import Image, ImageDraw
 import pygame
 from image_resizing import resize_image
 
-MAP_PATH = "parking_plan.jpg"
+ORIGINAL_MAP = "parking_plan_original.jpg"
+MAP_PATH = "parking_plan_fitted.jpg"
 BLUE = (66, 135, 245)
 SCREEN_LENGTH = 800
-resize_image(MAP_PATH, SCREEN_LENGTH, MAP_PATH)
-with Image.open(MAP_PATH) as im:
-    SCREEN_WIDTH = im.size[0]
-
+# resize_image(ORIGINAL_MAP, SCREEN_LENGTH, MAP_PATH)
+# with Image.open(MAP_PATH) as im:
+#     SCREEN_WIDTH = im.size[0]
+SCREEN_WIDTH = 1131
 
 def get_dimension(ul, br):
-    return abs(ul[0] - br[0]), abs(ul[1] - br[1])
+    return (abs(ul[0] - br[0]), abs(ul[1] - br[1]))
 
 
-def define_objects(object_width, object_length, caption):
+def define_objects(object_dimension, caption):
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_LENGTH))
     pygame.display.set_caption(caption)
     clock = pygame.time.Clock()
 
     bg = pygame.image.load(MAP_PATH).convert()
-    r = pygame.Rect(0, 0, object_width, object_length)
+    r = pygame.Rect((0, 0), object_dimension)
     objects_locations = []
 
     screen.blit(bg, (0, 0))
@@ -56,7 +57,7 @@ def define_objects(object_width, object_length, caption):
     pygame.quit()
     return objects_locations
 
-
+# look again
 def place_car(car_width, car_length):
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_LENGTH))
@@ -143,7 +144,9 @@ def mark_region(caption):
                 pressing = False            
 
     pygame.quit()
-    return upper_left, bottom_right    
+    if upper_left is None or bottom_right is None:
+        return None
+    return [upper_left, bottom_right]    
 
 
 def mark_regions(caption):
@@ -191,58 +194,120 @@ def mark_regions(caption):
     return coords
 
 
+def fit_figure_inside(domain_coords, figure_coords):
+        d_ul, d_br = domain_coords
+        f_ul, f_br = figure_coords
+
+        if f_ul[0] < d_ul[0]:
+            f_ul[0] = d_ul[0]
+        if d_br[0] < f_ul[0]:
+            return None
+
+        if f_ul[1] < d_ul[1]:
+            f_ul[1] = d_ul[1]
+        if d_br[1] < f_ul[1]:
+            return None
+        
+        if d_br[0] < f_br[0]:
+            f_br[0] = d_br[0]
+        if f_br[0] < d_ul[0]:
+            return None
+
+        if d_br[1] < f_br[1]:
+            f_br[1] = d_br[1]
+        if f_br[1] < d_ul[1]:
+            return None
+        
+        return [f_ul, f_br]
+
+          
+def fit_figures_inside(domain_coords, figures_coords):
+    fitted_figures = []
+    for figure in figures_coords:
+        fitted_f = fit_figure_inside(domain_coords, figure)
+        if fitted_f is not None:
+            fitted_figures.append(fitted_f)
+
+    return fitted_figures
+
+
 def main():
     # -------- Setting parking object ---------   
     # step 1: define parking size
-    parking_ul, parking_br = mark_region("Define parking size:")
-    if parking_ul is None or parking_br is None:
+    parking_location = mark_region("Define parking size:")
+    if parking_location is None:
         print("Defining parking size failed.")
         return None
-    parking_width, parking_length = get_dimension(parking_ul, parking_br)
-
+   
     # step 2: define parking slot size
-    slot_ul, slot_br = mark_region("Define slot size:")
-    if slot_ul or slot_br is None:
-        print("Defining slot size failed.")
+    slot_location = mark_region("Define slot size:")
+    if slot_location is None:
+        print("Failed to set slot size.")
         return None
-    slot_width, slot_length = get_dimension(slot_ul, slot_br)
+    slot_location = fit_figure_inside(parking_location, slot_location)
+    if slot_location is None:
+        print("Failed to set slot size.")
+        return None
+    slot_dimnension = get_dimension(slot_location)
 
     # step 3: place slots location
-    slots_locations = define_objects(slot_width, slot_length, "Define slots locations:")
+    slots_locations = define_objects(slot_dimnension, "Define slots locations:")
+    slots_locations = fit_figures_inside(parking_location, slots_locations)
+    if slots_locations == []:
+        print("Failed to set parking slots locations.")
+        return None
 
     # step 4: define entrance location
     v_entrance_location = mark_region("Define entrance (for vehicles):")
+    v_entrance_location = fit_figure_inside(parking_location, v_entrance_location)
+    if v_entrance_location is None:
+        print("Failed to set vehicles entrance location.")
+        return None
 
     # step 5: define exit location
     v_exit_location = mark_region("Define exit (for vehicles):")
+    v_exit_location = fit_figure_inside(parking_location, v_exit_location)
+    if v_exit_location is None:
+        print("Failed to set vehicles exit location.")
+        return None
 
     # step 6: define pedestrian exits
     p_exits_locations = mark_regions("Define pedestrian exits locations:")
+    p_exits_locations = fit_figures_inside(parking_location, p_exits_locations)
+    if p_exits_locations == []:
+        print("Failed to set pedestrians exit locations.")
+        return None
 
     # step 7: define walls and other obstacles
     walls_locations = mark_regions("Define walls(obstacles) locations:")
+    walls_locations = fit_figures_inside(parking_location, walls_locations)
 
     # step 8: define road directions
     arrow_up_char = '\u2191'
     arrow_down_char = '\u2193'
-    # to right
-    right_movement = mark_regions("<- To left <-")
-    left_movement = mark_regions("-> To right ->")
-    up_movement = mark_regions(f"{arrow_up_char} Up {arrow_up_char}")
-    down_movement = mark_regions(f"{arrow_down_char} Down {arrow_down_char}")
+    right_movement_areas = mark_regions("<- To right <-")
+    right_movement_areas = fit_figures_inside(parking_location, right_movement_areas)
+    left_movement_areas = mark_regions("-> To left ->")
+    left_movement_areas = fit_figures_inside(parking_location, left_movement_areas)
+    up_movement_areas = mark_regions(f"{arrow_up_char} Up {arrow_up_char}")
+    up_movement_areas = fit_figures_inside(parking_location, up_movement_areas)
+    down_movement_areas = mark_regions(f"{arrow_down_char} Down {arrow_down_char}")
+    down_movement_areas = fit_figures_inside(parking_location, down_movement_areas)
+    if right_movement_areas == [] or left_movement_areas == [] or up_movement_areas == [] or down_movement_areas == []:
+        print("Failed to set up movements areas.")
     
     # step 9: initialize parking object with gathered arguments
-    parking = Parking((parking_width, parking_length),
-                      (slot_width, slot_length),
+    parking = Parking(parking_location,
+                      slot_dimnension,
                       slots_locations,
                       v_entrance_location,
                       v_exit_location,
                       p_exits_locations,
                       walls_locations,
-                      left_movement,
-                      right_movement,
-                      up_movement,
-                      down_movement)
+                      left_movement_areas,
+                      right_movement_areas,
+                      up_movement_areas,
+                      down_movement_areas)
 
     # step 9.1: create binary occupancy map
 
@@ -304,6 +369,4 @@ def main():
 
 
 if __name__ == "__main__":
-    c = define_objects(15, 30, "Define regions")
-    [print(coord) for coord in c]
-    # main()
+    main()
