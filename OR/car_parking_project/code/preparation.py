@@ -1,19 +1,34 @@
-from parking_facilities import Parking
+import parking_facilities as pf
 from PIL import Image, ImageDraw
 import pygame
-from image_resizing import resize_image
+import pickle
+# from image_resizing import resize_image
 
 ORIGINAL_MAP = "parking_plan_original.jpg"
-MAP_PATH = "parking_plan_fitted.jpg"
+PARKING_MAP = "parking_plan_fitted.jpg"
+PATHS = ["parking_data/parking_dimension.dat", #parking_dimension,
+         "parking_data/vehicle_position.dat",#starting_vehicle_position,
+         "parking_data/parking_slots_locations.dat",#slots_locations,
+         "parking_data/parking_vehicles_entrance.dat",#v_entrance_location,
+         "parking_data/parking_vehicles_exit.dat",#v_exit_location,
+         "parking_data/parking_pedestrian_exit.dat",#p_exits_locations,
+         "parking_data/parking_obstacles.dat",#walls_locations,
+         "parking_data/parking_west_directions.dat",#west_movement_areas,
+         "parking_data/parking_east_directions.dat",#east_movement_areas,
+         "parking_data/parking_north_directions.dat", #north_movement_areas,
+         "parking_data/parking_south_directions.dat"] #south_movement_areas
+
+
 BLUE = (66, 135, 245)
 SCREEN_LENGTH = 800
-# resize_image(ORIGINAL_MAP, SCREEN_LENGTH, MAP_PATH)
-# with Image.open(MAP_PATH) as im:
+# resize_image(ORIGINAL_MAP, SCREEN_LENGTH, PARKING_MAP)
+# with Image.open(PARKING_MAP) as im:
 #     SCREEN_WIDTH = im.size[0]
 SCREEN_WIDTH = 1131
 
-def get_dimension(ul, br):
-    return (abs(ul[0] - br[0]), abs(ul[1] - br[1]))
+def get_dimension(coords):
+    ul, br = coords
+    return (br[0] - ul[0] + 1, br[1] - ul[1] + 1)
 
 
 def define_objects(object_dimension, caption):
@@ -22,7 +37,8 @@ def define_objects(object_dimension, caption):
     pygame.display.set_caption(caption)
     clock = pygame.time.Clock()
 
-    bg = pygame.image.load(MAP_PATH).convert()
+    original_bg = pygame.image.load(PARKING_MAP).convert()
+    bg = original_bg.copy()
     r = pygame.Rect((0, 0), object_dimension)
     objects_locations = []
 
@@ -38,18 +54,32 @@ def define_objects(object_dimension, caption):
             if event.type == pygame.QUIT:
                 running = False
                 break
-            if event.type == pygame.MOUSEBUTTONDOWN:
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_BACKSPACE:
+                    if len(objects_locations) > 0:
+                        objects_locations.pop()
+                        bg = original_bg.copy()
+                        screen.blit(bg, (0, 0))
+                        [pygame.draw.rect(bg, BLUE, pygame.Rect(object[0], get_dimension(object))) for object in objects_locations]
+                        pygame.display.flip()
+            elif event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
                     pos = pygame.mouse.get_pos()
-                    objects_locations.append([(pos[0], pos[1]), (pos[0] + r.width, pos[1] + r.height)])
+                    x_shift = pos[0] - r.left
+                    y_shift = pos[1] - r.top
+                    r.move_ip(x_shift, y_shift)
+                    objects_locations.append([r.topleft, r.bottomright])
                     pygame.draw.rect(bg, BLUE, r)
                     pygame.display.flip()
                 elif event.button == 3:
                     w = r.width
                     r.width = r.height
                     r.height = w
-            if event.type == pygame.MOUSEMOTION:
-                r.topleft = pygame.mouse.get_pos()
+            elif event.type == pygame.MOUSEMOTION:
+                pos = pygame.mouse.get_pos()
+                x_shift = pos[0] - r.left
+                y_shift = pos[1] - r.top
+                r.move_ip(x_shift, y_shift)
                 screen.blit(bg, (0, 0))
                 pygame.draw.rect(screen, BLUE, r)
                 pygame.display.flip()
@@ -58,15 +88,17 @@ def define_objects(object_dimension, caption):
     return objects_locations
 
 # look again
-def place_car(car_width, car_length):
+def define_object(object_dimension, caption):
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_LENGTH))
-    pygame.display.set_caption("Place car at initial position")
+    pygame.display.set_caption(caption)
     clock = pygame.time.Clock()
 
-    bg = pygame.image.load(MAP_PATH).convert()
-    r = pygame.Rect(0, 0, car_width, car_length)
 
+    original_bg = pygame.image.load(PARKING_MAP).convert()
+    bg = original_bg.copy()
+    r = pygame.Rect((0, 0), object_dimension)
+    object_location = None
     screen.blit(bg, (0, 0))
     pygame.draw.rect(screen, BLUE, r)
     pygame.display.flip()
@@ -79,27 +111,33 @@ def place_car(car_width, car_length):
             if event.type == pygame.QUIT:
                 running = False
                 break
-            if event.type == pygame.MOUSEBUTTONDOWN:
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_BACKSPACE:
+                    bg = original_bg.copy()
+                    screen.blit(bg, (0, 0))
+                    pygame.display.flip()
+            elif event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
                     pos = pygame.mouse.get_pos()
-                    r.topleft = pos
-                    running = False
-
-                    screen.blit(bg, (0, 0))
-                    pygame.draw.rect(screen, BLUE, r)
+                    x_shift = pos[0] - r.x
+                    y_shift = pos[1] - r.y
+                    r.move_ip(x_shift, y_shift)
+                    object_location = [r.topleft, r.bottomright]
+                    pygame.draw.rect(bg, BLUE, r)
                     pygame.display.flip()
-                    pygame.time.delay(2000)
-                    break
                 elif event.button == 3:
                     w = r.width
                     r.width = r.height
                     r.height = w
-        if running:
-            r.topleft = pygame.mouse.get_pos()
-            screen.blit(bg, (0, 0))
-            pygame.draw.rect(screen, BLUE, r)
-            pygame.display.flip()
-    return [r.topleft, r.bottomright]
+            elif event.type == pygame.MOUSEMOTION:
+                pos = pygame.mouse.get_pos()
+                x_shift = pos[0] - r.x
+                y_shift = pos[1] - r.y
+                r.move_ip(x_shift, y_shift)
+                screen.blit(bg, (0, 0))
+                pygame.draw.rect(screen, BLUE, r)
+                pygame.display.flip()
+    return object_location
 
 
 def mark_region(caption):
@@ -110,7 +148,7 @@ def mark_region(caption):
     clock = pygame.time.Clock()
 
     upper_left, bottom_right = None, None
-    bg = pygame.image.load(MAP_PATH).convert()
+    bg = pygame.image.load(PARKING_MAP).convert()
     screen.blit(bg, (0, 0))
     pygame.display.flip()
     running = True
@@ -125,11 +163,11 @@ def mark_region(caption):
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 upper_left = event.pos
                 pressing = True
-            elif pygame.mouse.get_pressed() == (1, 0, 0):
+            elif pygame.mouse.get_pressed() == (1, 0, 0) and upper_left is not None:
                 bottom_right = event.pos
                 # draw intermidiate rectangle
                 screen.blit(bg, (0, 0))
-                w, l = get_dimension(upper_left, bottom_right)
+                w, l = get_dimension((upper_left, bottom_right))
                 pygame.draw.rect(screen, BLUE, pygame.Rect(upper_left[0], upper_left[1], w, l))
                 pygame.display.flip()
             elif event.type == pygame.MOUSEBUTTONUP and pressing:
@@ -137,7 +175,7 @@ def mark_region(caption):
 
                 # draw final rectangle
                 screen.blit(bg, (0, 0))
-                w, l = get_dimension(upper_left, bottom_right)
+                w, l = get_dimension((upper_left, bottom_right))
                 pygame.draw.rect(screen, BLUE, pygame.Rect(upper_left[0], upper_left[1], w, l))
                 pygame.display.flip()
 
@@ -158,7 +196,8 @@ def mark_regions(caption):
 
     coords = []
     upper_left, bottom_right = None, None
-    bg = pygame.image.load(MAP_PATH).convert()
+    original_bg = pygame.image.load(PARKING_MAP).convert()
+    bg = original_bg.copy()
     screen.blit(bg, (0, 0))
     pygame.display.flip()
     running = True
@@ -170,33 +209,42 @@ def mark_regions(caption):
             if event.type == pygame.QUIT:
                 running = False
                 break
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_BACKSPACE:
+                    if len(coords) > 0:
+                        coords.pop()
+                        bg = original_bg.copy()
+                        screen.blit(bg, (0, 0))
+                        [pygame.draw.rect(bg, BLUE, pygame.Rect(object[0], get_dimension(object))) for object in coords]
+                        pygame.display.flip()
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 upper_left = event.pos
                 pressing = True
-            elif pygame.mouse.get_pressed() == (1, 0, 0):
-                bottom_right = event.pos
-                # draw intermidiate rectangle
-                screen.blit(bg, (0, 0))
-                w, l = get_dimension(upper_left, bottom_right)
-                pygame.draw.rect(screen, BLUE, pygame.Rect(upper_left[0], upper_left[1], w, l))
-                pygame.display.flip()
             elif event.type == pygame.MOUSEBUTTONUP and pressing:
                 bottom_right = event.pos
                 coords.append([upper_left, bottom_right])
                 # draw final rectangle
                 screen.blit(bg, (0, 0))
-                w, l = get_dimension(upper_left, bottom_right)
-                pygame.draw.rect(bg, BLUE, pygame.Rect(upper_left[0], upper_left[1], w, l))
+                w, l = get_dimension((upper_left, bottom_right))
+                pygame.draw.rect(bg, BLUE, pygame.Rect(upper_left, (w, l)))
                 # pygame.display.flip()
-
-                pressing = False
+                pressing = False    
+            if pygame.mouse.get_pressed() == (1, 0, 0) and upper_left is not None:
+                bottom_right = event.pos
+                # draw intermidiate rectangle
+                screen.blit(bg, (0, 0))
+                w, l = get_dimension((upper_left, bottom_right))
+                pygame.draw.rect(screen, BLUE, pygame.Rect(upper_left[0], upper_left[1], w, l))
+                pygame.display.flip()
+            
+            
     pygame.quit()
     return coords
 
 
 def fit_figure_inside(domain_coords, figure_coords):
-        d_ul, d_br = domain_coords
-        f_ul, f_br = figure_coords
+        d_ul, d_br = list(domain_coords[0]), list(domain_coords[1])
+        f_ul, f_br = list(figure_coords[0]), list(figure_coords[1])
 
         if f_ul[0] < d_ul[0]:
             f_ul[0] = d_ul[0]
@@ -218,7 +266,7 @@ def fit_figure_inside(domain_coords, figure_coords):
         if f_br[1] < d_ul[1]:
             return None
         
-        return [f_ul, f_br]
+        return [tuple(f_ul), tuple(f_br)]
 
           
 def fit_figures_inside(domain_coords, figures_coords):
@@ -245,13 +293,15 @@ def shift_coordinates_array(coordinates_array, x_shift, y_shift):
     return [shift_coordinate(coord, x_shift, y_shift) for coord in coordinates_array]
 
 
-def main():
+def set_up_parking():
     # -------- Setting parking object ---------   
     # step 1: define parking size
-    parking_location = mark_region("Define parking size:")
+    parking_location = mark_region("Define parking:")
     if parking_location is None:
-        print("Defining parking size failed.")
+        print("Defining of parking failed.")
         return None
+    parking_dimension = get_dimension(parking_location)
+    
     # step 1.2: define shift coordiantes(x_shift, y_shift)
     x_shift, y_shift = parking_location[0]
 
@@ -266,7 +316,14 @@ def main():
         return None
     slot_dimnension = get_dimension(slot_location)
 
-    # step 3: place slots location
+    # step 3: define default starting vehicle position
+    # starting_vehicle_position = define_object(slot_dimnension, "Define vehicle starting position:")
+    # if starting_vehicle_position is None:
+    #     print("Failed to set up starting vehicle position.")
+    #     return None 
+    # starting_vehicle_position = shift_coordinate(starting_vehicle_position, x_shift, y_shift)
+
+    # step 4: place slots location
     slots_locations = define_objects(slot_dimnension, "Define slots locations:")
     slots_locations = fit_figures_inside(parking_location, slots_locations)
     if slots_locations == []:
@@ -274,7 +331,7 @@ def main():
         return None
     slots_locations = shift_coordinates_array(slots_locations, x_shift, y_shift)
 
-    # step 4: define entrance location
+    # step 5: define entrance location
     v_entrance_location = mark_region("Define entrance (for vehicles):")
     v_entrance_location = fit_figure_inside(parking_location, v_entrance_location)
     if v_entrance_location is None:
@@ -282,7 +339,7 @@ def main():
         return None
     v_entrance_location = shift_coordinate(v_entrance_location, x_shift, y_shift)
 
-    # step 5: define exit location
+    # step 6: define exit location
     v_exit_location = mark_region("Define exit (for vehicles):")
     v_exit_location = fit_figure_inside(parking_location, v_exit_location)
     if v_exit_location is None:
@@ -290,7 +347,7 @@ def main():
         return None
     v_exit_location = shift_coordinate(v_exit_location, x_shift, y_shift)
 
-    # step 6: define pedestrian exits
+    # step 7: define pedestrian exits
     p_exits_locations = mark_regions("Define pedestrian exits locations:")
     p_exits_locations = fit_figures_inside(parking_location, p_exits_locations)
     if p_exits_locations == []:
@@ -298,42 +355,72 @@ def main():
         return None
     p_exits_locations = shift_coordinates_array(p_exits_locations, x_shift, y_shift) 
 
-    # step 7: define walls and other obstacles
+    # step 8: define walls and other obstacles
     walls_locations = mark_regions("Define walls(obstacles) locations:")
     walls_locations = fit_figures_inside(parking_location, walls_locations)
     walls_locations = shift_coordinates_array(walls_locations, x_shift, y_shift)
 
-    # step 8: define road directions
+    # step 9: define road directions
     arrow_up_char = '\u2191'
     arrow_down_char = '\u2193'
-    right_movement_areas = mark_regions("<- To right <-")
-    right_movement_areas = fit_figures_inside(parking_location, right_movement_areas)
-    left_movement_areas = mark_regions("-> To left ->")
-    left_movement_areas = fit_figures_inside(parking_location, left_movement_areas)
-    up_movement_areas = mark_regions(f"{arrow_up_char} Up {arrow_up_char}")
-    up_movement_areas = fit_figures_inside(parking_location, up_movement_areas)
-    down_movement_areas = mark_regions(f"{arrow_down_char} Down {arrow_down_char}")
-    down_movement_areas = fit_figures_inside(parking_location, down_movement_areas)
-    if right_movement_areas == [] or left_movement_areas == [] or up_movement_areas == [] or down_movement_areas == []:
+    west_movement_areas = mark_regions("<- To west <-")
+    west_movement_areas = fit_figures_inside(parking_location, west_movement_areas)
+    east_movement_areas = mark_regions("-> To east ->")
+    east_movement_areas = fit_figures_inside(parking_location, east_movement_areas)
+    north_movement_areas = mark_regions(f"{arrow_up_char} To north {arrow_up_char}")
+    north_movement_areas = fit_figures_inside(parking_location, north_movement_areas)
+    south_movement_areas = mark_regions(f"{arrow_down_char} To south {arrow_down_char}")
+    south_movement_areas = fit_figures_inside(parking_location, south_movement_areas)
+    if east_movement_areas == [] or west_movement_areas == [] or north_movement_areas == [] or south_movement_areas == []:
         print("Failed to set up movements areas.")
-    right_movement_areas = shift_coordinates_array(right_movement_areas, x_shift, y_shift)
-    left_movement_areas = shift_coordinates_array(left_movement_areas, x_shift, y_shift)
-    up_movement_areas = shift_coordinates_array(up_movement_areas, x_shift, y_shift)
-    down_movement_areas = shift_coordinates_array(down_movement_areas, x_shift, y_shift)
+    east_movement_areas = shift_coordinates_array(east_movement_areas, x_shift, y_shift)
+    west_movement_areas = shift_coordinates_array(west_movement_areas, x_shift, y_shift)
+    north_movement_areas = shift_coordinates_array(north_movement_areas, x_shift, y_shift)
+    south_movement_areas = shift_coordinates_array(south_movement_areas, x_shift, y_shift)
+   
+    parking = pf.Parking(parking_dimension,
+                         slots_locations,
+                         v_entrance_location,
+                         v_exit_location,
+                         p_exits_locations,
+                         walls_locations,
+                         west_movement_areas,
+                         east_movement_areas,
+                         north_movement_areas,
+                         south_movement_areas)
     
-    # step 9: initialize parking object with gathered arguments
-    parking = Parking(parking_location,
-                      slot_dimnension,
-                      slots_locations,
-                      v_entrance_location,
-                      v_exit_location,
-                      p_exits_locations,
-                      walls_locations,
-                      left_movement_areas,
-                      right_movement_areas,
-                      up_movement_areas,
-                      down_movement_areas)
+    parking_data = [parking_dimension,
+                    slots_locations,
+                    v_entrance_location,
+                    v_exit_location,
+                    p_exits_locations,
+                    walls_locations,
+                    west_movement_areas,
+                    east_movement_areas,
+                    north_movement_areas,
+                    south_movement_areas]
 
+    for data, path in list(zip(parking_data, PATHS)):
+        with open(path, 'wb') as f:
+            pickle.dump(data, f)
+    
+    return parking
+    
+    # step: save configured data
+
+    # step 10: initialize parking object with gathered arguments
+    # parking = Parking(parking_dimension,
+    #                   starting_vehicle_position,
+    #                   slots_locations,
+    #                   v_entrance_location,
+    #                   v_exit_location,
+    #                   p_exits_locations,
+    #                   walls_locations,
+    #                   west_movement_areas,
+    #                   east_movement_areas,
+    #                   north_movement_areas,
+    #                   south_movement_areas)
+    # return parking
     # step 9.1: create binary occupancy map
 
     # step 9.2: create directions map
@@ -346,52 +433,109 @@ def main():
     # step 10: save parking object
 
 
-
-# test: put car at initial position
-# initial_pos = place_car(10, 30)
-
-# with Image.open(MAP_PATH) as im:
-#     drawer = ImageDraw.Draw(im)
-#     drawer.point(initial_pos[0], fill=BLUE)
-#     im.show()
-
-
-
-# directions_map = parking.directions_map
-
-# # Left
-# canvas1 = Image.new('RGB', (parking.parking_width, parking.parking_length))
-# drawer1 = ImageDraw.Draw(canvas1)
-# for row in range(len(directions_map)):
-#     for col in range(len(row)):
-#         if 'Left' in directions_map[row][col]:
-#             drawer1.point(col, row, fill = BLUE)
-# canvas1.save('Left.png')
-# # Right
-# canvas2 = Image.new('RGB', (parking.parking_width, parking.parking_length))
-# drawer2 = ImageDraw.Draw(canvas2)
-# for row in range(len(directions_map)):
-#     for col in range(len(row)):
-#         if 'Right' in directions_map[row][col]:
-#             drawer2.point(col, row, fill = BLUE)
-# canvas2.save('Right.png')
-# # Up
-# canvas3 = Image.new('RGB', (parking.parking_width, parking.parking_length))
-# drawer3 = ImageDraw.Draw(canvas3)
-# for row in range(len(directions_map)):
-#     for col in range(len(row)):
-#         if 'Up' in directions_map[row][col]:
-#             drawer3.point(col, row, fill = BLUE)
-# canvas3.save('Up.png')
-# # Down
-# canvas4 = Image.new('RGB', (parking.parking_width, parking.parking_length))
-# drawer4 = ImageDraw.Draw(canvas4)
-# for row in range(len(directions_map)):
-#     for col in range(len(row)):
-#         if 'Down' in directions_map[row][col]:
-#             drawer4.point(col, row, fill = BLUE)
-# canvas4.save('Down.png')
-
-
 if __name__ == "__main__":
-    main()
+    # parking = set_up_parking()
+
+    with open('parking.dat', 'wb') as f:
+        parking = pickle.load(f)
+    
+
+    # with open ('parking.dat', 'wb') as f:
+    #     pickle.dump(parking, f)
+    # configurational_data = []
+    # for path in PATHS:
+    #     with open(path, 'rb') as f:
+    #         configurational_data.append(pickle.load(f))
+  
+    # parking = pf.Parking(
+    #                   configurational_data[0],
+    #                   configurational_data[1],
+    #                   configurational_data[2],
+    #                   configurational_data[3],
+    #                   configurational_data[4],
+    #                   configurational_data[5],
+    #                   configurational_data[6],
+    #                   configurational_data[7],
+    #                   configurational_data[8],
+    #                   configurational_data[9],
+    #                   configurational_data[10])
+
+    
+    # free_slots = parking.get_free_slots()
+    # x_shift, y_shift = -parking.WIDTH, -parking.LENGTH
+
+    # entrance_width, entrance_length = get_dimension(parking.car_entrance.coordinates)
+    # entrance_ul = parking.car_entrance.coordinates[0]
+    # start_pos = (entrance_ul[0] + round(entrance_width/2), entrance_ul[1] + round(entrance_length/2))
+
+    # path_and_cost = parking.get_trajectory(start_pos, free_slots[0].coordinates)
+
+    # if path_and_cost is not None:
+    #     path = [shift_coordinates_array(path_and_cost[0], x_shift, y_shift)]
+    #     with Image.open(PARKING_MAP) as im:
+    #         drawer = ImageDraw.Draw(im)
+    #         for p in path:
+    #             drawer.point(p, fill=BLUE)
+    #         im.show()
+    
+    
+    
+    
+    # with open('parking.bat', 'wb') as f:
+    #     pickle.dump(parking, f)
+        
+    # dimension = configurational_data[0]
+
+    # south_area = configurational_data[-1]
+    # north_area = configurational_data[-2]
+    # east_area = configurational_data[-3]
+    # west_area = configurational_data[-4]
+
+    # def within_parking(coords):
+    #     return coords[1][0] < dimension[0] and coords[1][1] < dimension[1]
+
+    # print("south:")
+    # for s in south_area:
+    #     if not within_parking(s):
+    #         print(f"Failed. coordinates: {s}, parking actual size: {dimension}")
+    # print("north:")
+    # for n in north_area:
+    #     if not within_parking(n):
+    #         print(f"Failed. coordinates: {n}, parking actual size: {dimension}")
+    # print("west:")
+    # for w in west_area:
+    #     if not within_parking(w):
+    #         print(f"Failed. coordinates: {w}, parking actual size: {dimension}")
+    # print("east:")
+    # for e in east_area:
+    #     if not within_parking(n):
+    #         print(f"Failed. coordinates: {e}, parking actual size: {dimension}")
+    
+
+    #                   parking_dimension,
+    #                   starting_vehicle_position,
+    #                   slots_locations,
+    #                   v_entrance_location,
+    #                   v_exit_location,
+    #                   p_exits_locations,
+    #                   walls_locations,
+    #                   west_movement_areas,
+    #                   east_movement_areas,
+    #                   north_movement_areas,
+    #                   south_movement_areas)
+    # im = Image.new('RGB', configurational_data[0], (255, 255, 255))
+    # d = ImageDraw.Draw(im)
+
+    # bi_g = parking.get_bi_grid()
+
+    # for y in range(len(bi_g)):
+    #     for x in range(len(bi_g[y])):
+    #         if bi_g[y][x] == 1:
+    #             d.point((y, x), fill=(0, 0, 0))
+    
+    # im.show()
+
+    # im = Image.new('RGB', configurational_data[0], (255, 255, 255))
+    # d = ImageDraw.Draw(im)
+
+        
