@@ -6,17 +6,17 @@ import pickle
 
 ORIGINAL_MAP = "parking_plan_original.jpg"
 PARKING_MAP = "parking_plan_fitted.jpg"
-PATHS = ["parking_data/parking_dimension.dat", #parking_dimension,
-         "parking_data/vehicle_position.dat",#starting_vehicle_position,
-         "parking_data/parking_slots_locations.dat",#slots_locations,
-         "parking_data/parking_vehicles_entrance.dat",#v_entrance_location,
-         "parking_data/parking_vehicles_exit.dat",#v_exit_location,
-         "parking_data/parking_pedestrian_exit.dat",#p_exits_locations,
-         "parking_data/parking_obstacles.dat",#walls_locations,
-         "parking_data/parking_west_directions.dat",#west_movement_areas,
-         "parking_data/parking_east_directions.dat",#east_movement_areas,
-         "parking_data/parking_north_directions.dat", #north_movement_areas,
-         "parking_data/parking_south_directions.dat"] #south_movement_areas
+PATHS = ["parking_data/parking_dimension.dat", 
+         "parking_data/image_shift.dat",
+         "parking_data/parking_slots_locations.dat",
+         "parking_data/parking_vehicles_entrance.dat",
+         "parking_data/parking_vehicles_exit.dat",    
+         "parking_data/parking_pedestrian_exit.dat",  
+         "parking_data/parking_obstacles.dat",        
+         "parking_data/parking_west_directions.dat",  
+         "parking_data/parking_east_directions.dat",  
+         "parking_data/parking_north_directions.dat", 
+         "parking_data/parking_south_directions.dat"] 
 
 
 BLUE = (66, 135, 245)
@@ -28,7 +28,7 @@ SCREEN_WIDTH = 1131
 
 def get_dimension(coords):
     ul, br = coords
-    return (br[0] - ul[0] + 1, br[1] - ul[1] + 1)
+    return br[0] - ul[0] + 1, br[1] - ul[1] + 1
 
 
 def define_objects(object_dimension, caption):
@@ -243,30 +243,30 @@ def mark_regions(caption):
 
 
 def fit_figure_inside(domain_coords, figure_coords):
-        d_ul, d_br = list(domain_coords[0]), list(domain_coords[1])
-        f_ul, f_br = list(figure_coords[0]), list(figure_coords[1])
+    domain_left, domain_upper = domain_coords[0]
+    domain_right, domain_bottom = domain_coords[1]
+    figure_left, figure_upper = figure_coords[0]
+    figure_right, figure_bottom = figure_coords[1]
 
-        if f_ul[0] < d_ul[0]:
-            f_ul[0] = d_ul[0]
-        if d_br[0] < f_ul[0]:
-            return None
-
-        if f_ul[1] < d_ul[1]:
-            f_ul[1] = d_ul[1]
-        if d_br[1] < f_ul[1]:
-            return None
-        
-        if d_br[0] < f_br[0]:
-            f_br[0] = d_br[0]
-        if f_br[0] < d_ul[0]:
-            return None
-
-        if d_br[1] < f_br[1]:
-            f_br[1] = d_br[1]
-        if f_br[1] < d_ul[1]:
-            return None
-        
-        return [tuple(f_ul), tuple(f_br)]
+    if figure_left < domain_left:
+        figure_left = domain_left
+    if domain_right < figure_left:
+        return None
+    if figure_upper < domain_upper:
+        figure_upper = domain_upper
+    if domain_bottom < figure_upper:
+        return None
+    
+    if domain_right < figure_right:
+        figure_right = domain_right
+    if figure_right < domain_left:
+        return None
+    if domain_bottom < figure_bottom:
+        figure_bottom = domain_bottom
+    if figure_bottom < domain_upper:
+        return None
+    
+    return [(figure_left, figure_upper), (figure_right, figure_bottom)]
 
           
 def fit_figures_inside(domain_coords, figures_coords):
@@ -379,6 +379,7 @@ def set_up_parking():
     south_movement_areas = shift_coordinates_array(south_movement_areas, x_shift, y_shift)
    
     parking = pf.Parking(parking_dimension,
+                         (x_shift, y_shift),
                          slots_locations,
                          v_entrance_location,
                          v_exit_location,
@@ -388,8 +389,10 @@ def set_up_parking():
                          east_movement_areas,
                          north_movement_areas,
                          south_movement_areas)
-    
+    parking.save("parking.dat")
+
     parking_data = [parking_dimension,
+                    (x_shift, y_shift),
                     slots_locations,
                     v_entrance_location,
                     v_exit_location,
@@ -399,10 +402,11 @@ def set_up_parking():
                     east_movement_areas,
                     north_movement_areas,
                     south_movement_areas]
-
+    
     for data, path in list(zip(parking_data, PATHS)):
         with open(path, 'wb') as f:
             pickle.dump(data, f)
+
     
     return parking
     
@@ -432,110 +436,78 @@ def set_up_parking():
 
     # step 10: save parking object
 
+def get_navigation_map(parking_map, parking_obj, slot):
+    path = slot.path
+    x_shift, y_shift = parking_obj.x_shift, parking_obj.y_shift
+    if path is not None:
+        with Image.open(parking_map) as im:
+            drawer = ImageDraw.Draw(im)
+            for i in range(len(path) - 1):
+                drawer.line(((path[i][0] + x_shift, path[i][1] + y_shift), (path[i+1][0] + x_shift, path[i+1][1] + y_shift)), BLUE, width=3)
+                drawer.rectangle(shift_coordinate(slot.coordinates, -x_shift, -y_shift), fill=BLUE)
+            im.show()
+            im.save(f"navigation_to_slot_{slot.id}.jpg")
+    else:
+        print("Couldn't generate navigation map.")
+    
+def f(parking):
+    unoptimized_slots = [slot for slot in parking.parking_slots if slot.path is None]
+    with Image.open("parking_plan_fitted.jpg") as im:
+        drawer = ImageDraw.Draw(im)
+        x_shift, y_shift = parking.x_shift, parking.y_shift
+        for slot in unoptimized_slots:
+            ul, br = slot.coordinates          
+            drawer.rectangle([(ul[0] + x_shift, ul[1] + y_shift), (br[0] + x_shift, br[1] + y_shift)], fill= (66, 135, 245))
+        im.show()
+
 
 if __name__ == "__main__":
-    # parking = set_up_parking()
-
-    with open('parking.dat', 'wb') as f:
-        parking = pickle.load(f)
+    # pass
+    # parkings = set_up_parking()
     
+    parking_dimension = pickle.load(open("parking_data/parking_dimension.dat", 'rb'))
+    (x_shift, y_shift) = pickle.load(open("parking_data/image_shift.dat", 'rb'))
+    slots_locations = pickle.load(open("parking_data/parking_slots_locations.dat", 'rb'))
+    v_entrance_location = pickle.load(open("parking_data/parking_vehicles_entrance.dat", 'rb'))
+    v_exit_location     = pickle.load(open("parking_data/parking_vehicles_exit.dat", 'rb'))
+    p_exits_locations   = pickle.load(open("parking_data/parking_pedestrian_exit.dat", 'rb'))
+    walls_locations     = pickle.load(open("parking_data/parking_obstacles.dat", 'rb'))
+    west_movement_areas = pickle.load(open("parking_data/parking_west_directions.dat", 'rb'))
+    east_movement_areas = pickle.load(open("parking_data/parking_east_directions.dat", 'rb'))
+    north_movement_areas = pickle.load(open("parking_data/parking_north_directions.dat", 'rb'))
+    south_movement_areas = pickle.load(open("parking_data/parking_south_directions.dat", 'rb'))
 
-    # with open ('parking.dat', 'wb') as f:
-    #     pickle.dump(parking, f)
-    # configurational_data = []
-    # for path in PATHS:
-    #     with open(path, 'rb') as f:
-    #         configurational_data.append(pickle.load(f))
-  
-    # parking = pf.Parking(
-    #                   configurational_data[0],
-    #                   configurational_data[1],
-    #                   configurational_data[2],
-    #                   configurational_data[3],
-    #                   configurational_data[4],
-    #                   configurational_data[5],
-    #                   configurational_data[6],
-    #                   configurational_data[7],
-    #                   configurational_data[8],
-    #                   configurational_data[9],
-    #                   configurational_data[10])
 
+    # [print(s) for s in slots_locations]
+    parking = pf.Parking(parking_dimension,
+                        (x_shift, y_shift),
+                        slots_locations,
+                        v_entrance_location,
+                        v_exit_location,     
+                        p_exits_locations,   
+                        walls_locations,     
+                        west_movement_areas, 
+                        east_movement_areas, 
+                        north_movement_areas,
+                        south_movement_areas)
+    # parking.set_optimality_parameters()
+    # f(parking)
+    parking.save("parking.dat")
+
+    # with open('parking.dat', 'rb') as f:
+    #     parking = pickle.load(f)
+    # grid = parking.get_bi_grid()
+    # x_shift, y_shift = parking.x_shift, parking.y_shift
+    # im = Image.new('RGB', (parking.WIDTH, parking.LENGTH), color=(255, 255, 255))
+    # with Image.open(PARKING_MAP) as im:
+    #     drawer = ImageDraw.Draw(im)
+    #     for x in range(parking.LENGTH):
+    #         for y in range(parking.WIDTH):
+    #             if grid[x][y] == 1:
+    #                 drawer.point((y + x_shift, x + y_shift), fill=BLUE)
+    #     im.show()
+
+
+
+    # parking.set_optimality_parameters()
     
-    # free_slots = parking.get_free_slots()
-    # x_shift, y_shift = -parking.WIDTH, -parking.LENGTH
-
-    # entrance_width, entrance_length = get_dimension(parking.car_entrance.coordinates)
-    # entrance_ul = parking.car_entrance.coordinates[0]
-    # start_pos = (entrance_ul[0] + round(entrance_width/2), entrance_ul[1] + round(entrance_length/2))
-
-    # path_and_cost = parking.get_trajectory(start_pos, free_slots[0].coordinates)
-
-    # if path_and_cost is not None:
-    #     path = [shift_coordinates_array(path_and_cost[0], x_shift, y_shift)]
-    #     with Image.open(PARKING_MAP) as im:
-    #         drawer = ImageDraw.Draw(im)
-    #         for p in path:
-    #             drawer.point(p, fill=BLUE)
-    #         im.show()
-    
-    
-    
-    
-    # with open('parking.bat', 'wb') as f:
-    #     pickle.dump(parking, f)
-        
-    # dimension = configurational_data[0]
-
-    # south_area = configurational_data[-1]
-    # north_area = configurational_data[-2]
-    # east_area = configurational_data[-3]
-    # west_area = configurational_data[-4]
-
-    # def within_parking(coords):
-    #     return coords[1][0] < dimension[0] and coords[1][1] < dimension[1]
-
-    # print("south:")
-    # for s in south_area:
-    #     if not within_parking(s):
-    #         print(f"Failed. coordinates: {s}, parking actual size: {dimension}")
-    # print("north:")
-    # for n in north_area:
-    #     if not within_parking(n):
-    #         print(f"Failed. coordinates: {n}, parking actual size: {dimension}")
-    # print("west:")
-    # for w in west_area:
-    #     if not within_parking(w):
-    #         print(f"Failed. coordinates: {w}, parking actual size: {dimension}")
-    # print("east:")
-    # for e in east_area:
-    #     if not within_parking(n):
-    #         print(f"Failed. coordinates: {e}, parking actual size: {dimension}")
-    
-
-    #                   parking_dimension,
-    #                   starting_vehicle_position,
-    #                   slots_locations,
-    #                   v_entrance_location,
-    #                   v_exit_location,
-    #                   p_exits_locations,
-    #                   walls_locations,
-    #                   west_movement_areas,
-    #                   east_movement_areas,
-    #                   north_movement_areas,
-    #                   south_movement_areas)
-    # im = Image.new('RGB', configurational_data[0], (255, 255, 255))
-    # d = ImageDraw.Draw(im)
-
-    # bi_g = parking.get_bi_grid()
-
-    # for y in range(len(bi_g)):
-    #     for x in range(len(bi_g[y])):
-    #         if bi_g[y][x] == 1:
-    #             d.point((y, x), fill=(0, 0, 0))
-    
-    # im.show()
-
-    # im = Image.new('RGB', configurational_data[0], (255, 255, 255))
-    # d = ImageDraw.Draw(im)
-
-        
