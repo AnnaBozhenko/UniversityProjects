@@ -1,4 +1,4 @@
 Problems to be fixed
-    1. starting vehicle position can be at the wall, so path from entrance to the slot is unreached
+    1. figure_interstects_destination
      
  
