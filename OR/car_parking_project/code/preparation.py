@@ -2,7 +2,7 @@ import parking_facilities as pf
 from PIL import Image, ImageDraw
 import pygame
 import pickle
-# from image_resizing import resize_image
+from image_resizing import resize_image
 
 ORIGINAL_MAP = "parking_plan_original.jpg"
 PARKING_MAP = "parking_plan_fitted.jpg"
@@ -21,10 +21,10 @@ PATHS = ["parking_data/parking_dimension.dat",
 
 BLUE = (66, 135, 245)
 SCREEN_LENGTH = 800
-# resize_image(ORIGINAL_MAP, SCREEN_LENGTH, PARKING_MAP)
-# with Image.open(PARKING_MAP) as im:
-#     SCREEN_WIDTH = im.size[0]
-SCREEN_WIDTH = 1131
+resize_image(PARKING_MAP, SCREEN_LENGTH, PARKING_MAP)
+with Image.open(PARKING_MAP) as im:
+    SCREEN_WIDTH = im.size[0]
+# SCREEN_WIDTH = 1131
 
 def get_dimension(coords):
     ul, br = coords
@@ -363,22 +363,29 @@ def set_up_parking():
     # step 9: define road directions
     arrow_up_char = '\u2191'
     arrow_down_char = '\u2193'
+
     west_movement_areas = mark_regions("<- To west <-")
     west_movement_areas = fit_figures_inside(parking_location, west_movement_areas)
+
     east_movement_areas = mark_regions("-> To east ->")
     east_movement_areas = fit_figures_inside(parking_location, east_movement_areas)
+
     north_movement_areas = mark_regions(f"{arrow_up_char} To north {arrow_up_char}")
     north_movement_areas = fit_figures_inside(parking_location, north_movement_areas)
+
     south_movement_areas = mark_regions(f"{arrow_down_char} To south {arrow_down_char}")
     south_movement_areas = fit_figures_inside(parking_location, south_movement_areas)
+
     if east_movement_areas == [] or west_movement_areas == [] or north_movement_areas == [] or south_movement_areas == []:
         print("Failed to set up movements areas.")
+        
     east_movement_areas = shift_coordinates_array(east_movement_areas, x_shift, y_shift)
     west_movement_areas = shift_coordinates_array(west_movement_areas, x_shift, y_shift)
     north_movement_areas = shift_coordinates_array(north_movement_areas, x_shift, y_shift)
     south_movement_areas = shift_coordinates_array(south_movement_areas, x_shift, y_shift)
    
-    parking = pf.Parking(parking_dimension,
+    parking = pf.Parking(PARKING_MAP,
+                         parking_dimension,
                          (x_shift, y_shift),
                          slots_locations,
                          v_entrance_location,
@@ -435,20 +442,6 @@ def set_up_parking():
     # optimality coefficients and paths to each parking slot
 
     # step 10: save parking object
-
-def get_navigation_map(parking_map, parking_obj, slot):
-    path = slot.path
-    x_shift, y_shift = parking_obj.x_shift, parking_obj.y_shift
-    if path is not None:
-        with Image.open(parking_map) as im:
-            drawer = ImageDraw.Draw(im)
-            for i in range(len(path) - 1):
-                drawer.line(((path[i][0] + x_shift, path[i][1] + y_shift), (path[i+1][0] + x_shift, path[i+1][1] + y_shift)), BLUE, width=3)
-                drawer.rectangle(shift_coordinate(slot.coordinates, -x_shift, -y_shift), fill=BLUE)
-            im.show()
-            im.save(f"navigation_to_slot_{slot.id}.jpg")
-    else:
-        print("Couldn't generate navigation map.")
     
 def f(parking):
     unoptimized_slots = [slot for slot in parking.parking_slots if slot.path is None]
@@ -462,8 +455,8 @@ def f(parking):
 
 
 if __name__ == "__main__":
-    # pass
-    # parkings = set_up_parking()
+    (x_shift, y_shift) = pickle.load(open("parking_data/image_shift.dat", 'rb'))
+    
     
     parking_dimension = pickle.load(open("parking_data/parking_dimension.dat", 'rb'))
     (x_shift, y_shift) = pickle.load(open("parking_data/image_shift.dat", 'rb'))
@@ -477,9 +470,8 @@ if __name__ == "__main__":
     north_movement_areas = pickle.load(open("parking_data/parking_north_directions.dat", 'rb'))
     south_movement_areas = pickle.load(open("parking_data/parking_south_directions.dat", 'rb'))
 
-
-    # [print(s) for s in slots_locations]
-    parking = pf.Parking(parking_dimension,
+    parking = pf.Parking(PARKING_MAP,
+                        parking_dimension,
                         (x_shift, y_shift),
                         slots_locations,
                         v_entrance_location,
@@ -490,24 +482,5 @@ if __name__ == "__main__":
                         east_movement_areas, 
                         north_movement_areas,
                         south_movement_areas)
-    # parking.set_optimality_parameters()
-    # f(parking)
+    parking.set_optimality_parameters()
     parking.save("parking.dat")
-
-    # with open('parking.dat', 'rb') as f:
-    #     parking = pickle.load(f)
-    # grid = parking.get_bi_grid()
-    # x_shift, y_shift = parking.x_shift, parking.y_shift
-    # im = Image.new('RGB', (parking.WIDTH, parking.LENGTH), color=(255, 255, 255))
-    # with Image.open(PARKING_MAP) as im:
-    #     drawer = ImageDraw.Draw(im)
-    #     for x in range(parking.LENGTH):
-    #         for y in range(parking.WIDTH):
-    #             if grid[x][y] == 1:
-    #                 drawer.point((y + x_shift, x + y_shift), fill=BLUE)
-    #     im.show()
-
-
-
-    # parking.set_optimality_parameters()
-    
