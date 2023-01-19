@@ -1,10 +1,12 @@
-# from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw
 from math import floor
 from random import choices
 import time
 import numpy as np
 import pickle
 import gc
+
+from preparation import BLUE, shift_coordinate
 
 def get_dimension(coords):
     ul, br = coords
@@ -70,7 +72,8 @@ class ParkingWall(ParkingObject):
 
 
 class Parking:
-    def __init__(self, 
+    def __init__(self,
+                 map, 
                  dimensions, 
                  shift,
                  slots_coords, 
@@ -83,6 +86,7 @@ class Parking:
                  north_movement_area, 
                  south_movement_area):        
         
+        self.MAP = map
         self.WIDTH = dimensions[0]
         self.LENGTH = dimensions[1]
         self.x_shift = shift[0]
@@ -120,8 +124,8 @@ class Parking:
             x_medium = self.car_entrance.coordinates[0][0] + floor(car_entrance_width/2)
             y_medium = self.car_entrance.coordinates[0][1] + floor(car_entrance_length/2)
             if car_width % 2 == 0:
-                upper_left = (x_medium - floor(car_width/2), y_medium - floor(car_width/2))
-                bottom_right = (x_medium + floor(car_width/2) - 1, y_medium + floor(car_width/2) - 1)
+                upper_left = (x_medium - int(car_width/2), y_medium - int(car_width/2))
+                bottom_right = (x_medium + int(car_width/2) - 1, y_medium + int(car_width/2) - 1)
             else:
                 upper_left = (x_medium - floor(car_width/2), y_medium - floor(car_width/2))
                 bottom_right = (x_medium + floor(car_width/2), y_medium + floor(car_width/2))
@@ -173,7 +177,7 @@ class Parking:
         print("Couldn't find slot with given id.")
 
 
-    def find_optimal_slot(self, close_to_entrance = 0.5, close_to_vehicle_exit = 0, close_to_p_exit = 0):
+    def find_optimal_slot(self, close_to_entrance = 0.5, close_to_vehicle_exit = 0, close_to_p_exit = 0.5):
         optimal_slot = None
 
         count_total_cost = lambda v_entrance, v_exit, p_exit: v_entrance*close_to_entrance + v_exit*close_to_vehicle_exit + p_exit*close_to_p_exit
@@ -182,8 +186,8 @@ class Parking:
 
         for slot in self.get_free_slots():
             if slot.path is None:
-                print('Slot is unreached.')
-                return None
+                print(f'Slot {slot.id} is unreached.')
+                continue
             cost = count_total_cost(slot.car_entrance_distance_rate, slot.car_exit_distance_rate, slot.p_exit_distance_rate)
             if optimal_slot is None or optimal_cost > cost:
                 optimal_slot = slot
@@ -194,6 +198,48 @@ class Parking:
             return None
         else:
             return optimal_slot, optimal_cost
+        
+    
+    def generate_navigation_to_slot(self, slot):
+        if slot.path is None:
+            print(f'Slot {slot.id} is unreached.')
+        else:
+            p_pos_side = min(get_dimension(slot.coordinates))
+            with Image.open(self.MAP) as im:
+                drawer = ImageDraw.Draw(im)
+                for p in slot.path:
+                    bottom_right = (p[0] + (p_pos_side - 1), p[1] + (p_pos_side - 1))
+                    drawer.rectangle(shift_coordinate([p, bottom_right], -self.x_shift, -self.y_shift), fill=BLUE)
+                # plot occupied positions
+                for occupied_slot in self.get_occupied_slots():
+                    ul = (occupied_slot.coordinates[0][0] + self.x_shift, occupied_slot.coordinates[0][1] + self.y_shift)
+                    br = (occupied_slot.coordinates[1][0] + self.x_shift, occupied_slot.coordinates[1][1] + self.y_shift)
+                    bl = (occupied_slot.coordinates[0][0] + self.x_shift, occupied_slot.coordinates[1][1] + self.y_shift)
+                    ur = (occupied_slot.coordinates[1][0] + self.x_shift, occupied_slot.coordinates[0][1] + self.y_shift)
+
+                    drawer.line([ul, br], fill=(0, 0, 0), width=3)
+                    drawer.line([bl, ur], fill=(0, 0, 0), width=3) 
+                # plot starting position
+                drawer.rectangle(shift_coordinate(self.start_at_entrance, -self.x_shift, -self.y_shift), fill=(50, 168, 82))
+                # plot destination area
+                drawer.rectangle(shift_coordinate(slot.coordinates, -self.x_shift, -self.y_shift), fill=(252, 115, 3))
+                im.show()
+                im.save(f"navigation_to_slot_{slot.id}.jpg") 
+
+
+    def generate_current_plan(self):
+        with Image.open(self.MAP) as im:
+            drawer = ImageDraw.Draw(im)
+            for occupied_slot in self.get_occupied_slots():
+                ul = (occupied_slot.coordinates[0][0] + self.x_shift, occupied_slot.coordinates[0][1] + self.y_shift)
+                br = (occupied_slot.coordinates[1][0] + self.x_shift, occupied_slot.coordinates[1][1] + self.y_shift)
+                bl = (occupied_slot.coordinates[0][0] + self.x_shift, occupied_slot.coordinates[1][1] + self.y_shift)
+                ur = (occupied_slot.coordinates[1][0] + self.x_shift, occupied_slot.coordinates[0][1] + self.y_shift)
+            
+                drawer.line([ul, br], fill=(0, 0, 0), width=3)
+                drawer.line([bl, ur], fill=(0, 0, 0), width=3)
+            im.show()
+            im.save("current_map.jpg")
 
 
     def evaluate_close_to_entrance_parameter(self, slot):
@@ -201,7 +247,7 @@ class Parking:
         path_and_cost = self.get_trajectory(self.start_at_entrance, slot.coordinates)
         time_range = time.process_time() - start_time
         print(f"CPU time to process get_trajectory() to generate entrance-slot path: {time_range} seconds")
-        if path_and_cost is None:
+        if type(path_and_cost) == list:
             print("Couldn't evaluate close to entrance parameter.")
             return None
         
@@ -212,8 +258,8 @@ class Parking:
         # else:
         #     return 1/cost
 
-    
-    def evaluate_close_to_vehicles_exit_parameter(self, slot):
+
+    def get_vehicle_pos(self, slot):
         # define vehicle starting position
         ul, br = slot.coordinates
         figure_side = min(get_dimension(slot.coordinates))
@@ -257,17 +303,23 @@ class Parking:
     #      |slot |
     #      |     |
     #      |     |
-    #      |_____|  
-    #   
-                c_bottom_right = (br[0], ul[1] - deviation_from_slot)
-                c_upper_left = (c_bottom_right[0] - figure_side, c_bottom_right[1] - figure_side)
-                vehicle_pos = [c_upper_left, c_bottom_right]   
+    #      |_____|    
+                    c_bottom_right = (br[0], ul[1] - deviation_from_slot)
+                    c_upper_left = (c_bottom_right[0] - figure_side, c_bottom_right[1] - figure_side)
+                    vehicle_pos = [c_upper_left, c_bottom_right]   
+        return vehicle_pos
+
+    
+    def evaluate_close_to_vehicles_exit_parameter(self, slot):
+        # define vehicle starting position
+        vehicle_pos = self.get_vehicle_pos(slot)  
         start_time = time.time()
         path_and_cost = self.get_trajectory(vehicle_pos, self.car_exit.coordinates)
         exec_time = time.time() - start_time
         print(f"CPU time to process get_trajectory() to generate slot-vehicles-exit path: {exec_time} seconds")
-        if path_and_cost is None:
+        if type(path_and_cost) == list:
             print("Couldn't generate optimal parameter for close-to-vehicles-exit")
+            return None
         cost = path_and_cost[1]
         return cost
         # if cost == 0:
@@ -275,34 +327,29 @@ class Parking:
         # else:
         #     return 1 / cost, path
 
-    
-    def evaluate_close_to_ped_exit_parameter(self, slot):
-        # find start position: 
 
-        # find start position: 
-
+    def get_pedestrian_position(self, slot):
         ul, br = slot.coordinates
         slot_min_size = min(get_dimension(slot.coordinates))
-        figure_side = round(slot_min_size / 2)
-        deviation_from_slot = figure_side
+        figure_side = int(slot_min_size / 2) 
         middle_x = ul[0] + round((br[0] - ul[0])/2)
         middle_y = ul[1] + round((br[1] - ul[1])/2)
         pedestrian_pos = None
      
         if br[1] - ul[1] + 1 == slot_min_size:
     #   __   _________
-    #  |__|_|   slot  |
+    #  |__| |   slot  |
     #       |_________|    
-
-            c_bottom_right = (ul[0] - deviation_from_slot, middle_y)
+        
+            c_bottom_right = (ul[0] - figure_side - 1, middle_y)
             c_upper_left = (c_bottom_right[0] - figure_side, c_bottom_right[1] - figure_side)
             pedestrian_pos = [c_upper_left, c_bottom_right]
             if not self.valid_figure_position(pedestrian_pos) or not self.space_is_free(pedestrian_pos):
     #       _________  
-    #      |   slot  |_ __
+    #      |   slot  |  __
     #      |_________| |__| 
 
-                c_upper_left = (br[0] + deviation_from_slot, middle_y)
+                c_upper_left = (br[0] + figure_side + 1, middle_y)
                 c_bottom_right = (c_upper_left[0] + figure_side, c_upper_left[1] + figure_side)
                 pedestrian_pos = [c_upper_left, c_bottom_right]     
         else:       
@@ -311,31 +358,38 @@ class Parking:
     #      |     |
     #      |     |
     #      |_____|
-    #         |__
+    #          __
     #         |__|
 
-            c_upper_left = (middle_x, br[1] + deviation_from_slot)
+            c_upper_left = (middle_x, br[1] + figure_side + 1)
             c_bottom_right = (c_upper_left[0] + figure_side, c_upper_left[1] + figure_side)
             pedestrian_pos = [c_upper_left, c_bottom_right]
             if not self.valid_figure_position(pedestrian_pos) or not self.space_is_free(pedestrian_pos):
     #       __
     #      |__|
-    #       __|__
+    #       _____
     #      |slot |
     #      |     |
     #      |     |
     #      |_____|    
 
-                c_bottom_right = (middle_x, ul[1] - deviation_from_slot)
+                c_bottom_right = (middle_x, ul[1] - figure_side - 1)
                 c_upper_left = (c_bottom_right[0] - figure_side, c_bottom_right[1] - figure_side)
                 pedestrian_pos = [c_upper_left, c_bottom_right]
+        return pedestrian_pos
+
+
+    def evaluate_close_to_ped_exit_parameter(self, slot):
+        pedestrian_pos = self.get_pedestrian_position(slot)
         cost = None
+        exit_n = 1
         for p_exit in self.p_exits:
             start_time = time.time()
             path_and_cost = self.get_trajectory(pedestrian_pos, p_exit.coordinates, direction_is_important = False)
             exec_time = time.time() - start_time
-            print(f"CPU time to process get_trajectory() to generate slot-pedestrians-exit path: {exec_time} seconds")
-            if path_and_cost is None:
+            print(f"CPU time to process get_trajectory() to generate slot{slot.id}-pedestrians-exit{exit_n} path: {exec_time} seconds")
+            exit_n += 1
+            if type(path_and_cost) == list:
                 continue
             cost = path_and_cost[1] if cost is None or path_and_cost[1] < cost else cost
         if cost is None:
@@ -373,7 +427,7 @@ class Parking:
 
     within_width = lambda self, x: 0 <= x < self.WIDTH
     within_length = lambda self, y: 0 <= y < self.LENGTH
-    point_is_free = lambda self, coords: self.bi_occupancy_map[coords[1]][coords[0]] == 0
+    point_is_free = lambda self, coords: self.occupancy_map[coords[1]][coords[0]] == 0
 
 
     def space_is_free(self, coordinates):
@@ -392,25 +446,25 @@ class Parking:
             
 
     def generate_occupancy_map(self):
-        bi_grid = np.zeros((self.LENGTH, self.WIDTH), dtype = int)
+        grid_map = np.zeros((self.LENGTH, self.WIDTH), dtype = int)
 
         for slot in self.parking_slots:
             for point in Parking.get_coords_within(slot.coordinates[0], slot.coordinates[1]):
-                bi_grid[point[1]][point[0]] = 1
+                grid_map[point[1]][point[0]] = 1
         
         for p_exit in self.p_exits:
             for point in Parking.get_coords_within(p_exit.coordinates[0], p_exit.coordinates[1]):
-                bi_grid[point[1]][point[0]] = 1
+                grid_map[point[1]][point[0]] = 2
         
         for wall in self.walls:
             for point in Parking.get_coords_within(wall.coordinates[0], wall.coordinates[1]):
-                bi_grid[point[1]][point[0]] = 1
+                grid_map[point[1]][point[0]] = 3
         
-        self.bi_occupancy_map = bi_grid
+        self.occupancy_map = grid_map
 
 
-    def get_bi_grid(self):
-        return self.bi_occupancy_map
+    def get_occupancy_map(self):
+        return self.occupancy_map
     
 
     def generate_movements_map(self, west_area, east_area, north_area, south_area):
@@ -486,10 +540,9 @@ class Parking:
     # move_figure_to_south_east = lambda coords: Parking.move_figure_to_east(Parking.move_figure_to_south(coords))
 
     @staticmethod
-    def point_inside_space(point, space):
-        space_ul, space_br = space
-        point_x, space_y = point
-        return space_ul[0] <= point_x <= space_br[0] and space_ul[1] <= space_y <= space_br[1]
+    def point_inside_domain(point, domain):
+        domain_ul, domain_br = domain
+        return domain_ul[0] <= point[0] <= domain_br[0] and domain_ul[1] <= point[1] <= domain_br[1]
 
 
     @staticmethod
@@ -504,186 +557,128 @@ class Parking:
         figure2_upper_right = (figure2_bottom_right[0], figure2_upper_left[1])
         figure2_bottom_left = (figure2_upper_left[0], figure2_bottom_right[1])
         
-        return any([Parking.point_inside_space(figure1_upper_left, figure2) or   Parking.point_inside_space(figure2_upper_left, figure1), 
-                    Parking.point_inside_space(figure1_bottom_right, figure2) or Parking.point_inside_space(figure2_bottom_right, figure1),
-                    Parking.point_inside_space(figure1_upper_right, figure2) or  Parking.point_inside_space(figure2_upper_right, figure1),
-                    Parking.point_inside_space(figure1_bottom_left, figure2) or  Parking.point_inside_space(figure2_bottom_left, figure1)])
+        return any([Parking.point_inside_domain(figure1_upper_left, figure2) or   Parking.point_inside_domain(figure2_upper_left, figure1), 
+                    Parking.point_inside_domain(figure1_bottom_right, figure2) or Parking.point_inside_domain(figure2_bottom_right, figure1),
+                    Parking.point_inside_domain(figure1_upper_right, figure2) or  Parking.point_inside_domain(figure2_upper_right, figure1),
+                    Parking.point_inside_domain(figure1_bottom_left, figure2) or  Parking.point_inside_domain(figure2_bottom_left, figure1)])
         
-
     def get_trajectory(self, starting_pos, destination_coordinates, direction_is_important = True):
-        # starting coordinates - coordinates of square: [upper_left_point, bottom_right_point];
-        # destination coordinates - coordinates of destination area: [upper_left_point, bottom_right_point];
-        #  
         # check if starting coordinates is a valid position 
         # movement - 4 directions allowed: north, south, west, east 
         if not self.valid_figure_position(starting_pos) or not self.space_is_free(starting_pos) or not self.valid_figure_position(destination_coordinates):
-            print(f"Parking width: {self.WIDTH}, length{self.LENGTH}. Start pos: {starting_pos}, end area: {destination_coordinates}")
             print("Given coordinates are invalid.")
             return None
 
         figure_min_size = min(get_dimension(starting_pos))
-        step = floor(figure_min_size/2) - 1 if figure_min_size % 2 == 0 else floor(figure_min_size/2)
+        step = int(figure_min_size/2)
 
+        def recreate_figure(point):
+            # upper_left = point
+            bottom_right = (point[0] + figure_min_size - 1, point[1] + figure_min_size - 1)
+            return [point, bottom_right]
+        
         # create heuristic function: for 4 sides - manhattan distance h(p1, p2) = abs(p1.x - p2.x) + abs(p1.y - p2.y)
-        # where p1, p2 - upper left points of appropriate figure rectangle
         def heuristic(point):
-            destination_ul = destination_coordinates[0]
-            return abs(point[0] - destination_ul[0]) + abs(point[1] - destination_ul[1])
+            return abs(point[0] - destination_coordinates[0][0]) + abs(point[1] - destination_coordinates[0][1])
 
         # create g function: g(parent_g) = parent_g + 1
         def g_cost(parent_g):
             return parent_g + 1
         
-        # develop for figure as parameter
-        def intersects_destination(figure_pos):
-            x_medium = floor((figure_pos[1][0] - figure_pos[0][0])/2)
-            y_medium = floor((figure_pos[1][1] - figure_pos[0][1])/2)
-            upper_medium = (figure_pos[0][0] + x_medium, figure_pos[0][1]) 
-            left_medium = (figure_pos[0][0], figure_pos[0][1] + y_medium)
-            right_medium = (figure_pos[0][1], figure_pos[1][1] - y_medium)
-            bottom_medium = (figure_pos[0][0] + x_medium, figure_pos[1][1])
-            return any([Parking.point_inside_space(upper_medium, destination_coordinates),
-                    Parking.point_inside_space(left_medium, destination_coordinates),
-                    Parking.point_inside_space(right_medium, destination_coordinates),
-                    Parking.point_inside_space(bottom_medium, destination_coordinates)])
-         
-        # create open_array: {(figure coordinates): (figure_g, figure_h)}
-        open_array = {}
-        # create closed_array: {(figure coordinates): (figure_g, figure_h)}
-        closed_array = {}
-        # create parents: {(figure coordinates): (figure previous location coordinates)}
-        parents = {}
-        # append to open_array - staring_coordinates: (0, heuristic(staring_coordinates, destination_coordinates)
-        open_array[starting_pos[0]] = (0, heuristic(starting_pos[0]))
-        parents[starting_pos[0]] = starting_pos[0]
-        goal_pos = None
+        def point_inside_destination(point):
+            return destination_coordinates[0][0] <= point[0] <= destination_coordinates[1][0] and destination_coordinates[0][1] <= point[1] <= destination_coordinates[1][1]
+
+        # def figure_interstects_destination(figure_pos):
+        #     if Parking.spaces_intersect(figure_pos, destination_coordinates):
+        #         medium_step = int(figure_min_size/2)
+        #         if destination_coordinates[1][0] - destination_coordinates[0][0] < destination_coordinates[1][1] - destination_coordinates[0][1]:
+        #             upper_medium = (figure_pos[0][0] + medium_step, figure_pos[0][1])
+        #             bottom_medium = (figure_pos[0][0] + medium_step, figure_pos[1][1])
+        #             return any([point_inside_destination(upper_medium) and destination_coordinates[0][0] <= upper_medium[0] <= destination_coordinates[1][0],
+        #                        point_inside_destination(bottom_medium) and destination_coordinates[0][0] <= bottom_medium[0] <= destination_coordinates[1][0]])
+        #         else:
+        #             left_medium = (figure_pos[0][0], figure_pos[0][1] + medium_step)
+        #             right_medium = (figure_pos[1][0], figure_pos[0][1] + medium_step)
+        #             return any([point_inside_destination(left_medium) and destination_coordinates[0][1] <= left_medium[1] <= destination_coordinates[1][1],
+        #                         point_inside_destination(right_medium) and destination_coordinates[0][1] <= right_medium[1] <= destination_coordinates[1][1]]) 
         
+         
+        open_array = []
+        closed_array = []
+        previous = {}
+        cost = {}
+        # append to open_array - staring_coordinates: (0, heuristic(staring_coordinates, destination_coordinates)
+        start = starting_pos[0]
+        open_array.append(start)
+        cost[start] = (0, heuristic(start))
+        previous[start] = start
         # start loop while there are figure positions in the open_array 
         while len(open_array) > 0:
-            # find q = the figure position in open array with the minimum h + g
-            q = min(open_array, key= lambda k: sum(open_array[k]))
+            q = min([el for el in cost.items() if el[0] in open_array], key = lambda x: sum(x[1]))[0]
             # pop q from open list
-            q_cost = open_array.pop(q)
+            open_array.remove(q)
+            closed_array.append(q)
+
+            for candidate, opposite_direction in [(Parking.move_point_to_north(q, step), 'SOUTH'),
+                                                  (Parking.move_point_to_south(q, step), 'NORTH'),
+                                                  (Parking.move_point_to_east(q,  step), 'WEST'),
+                                                  (Parking.move_point_to_west(q,  step), 'EAST')]:
+                figure_pos = recreate_figure(candidate)
+                if self.valid_figure_position(figure_pos):
+                    # for vehicles trajectory check if there are no pedestrian exits(2) or walls(3) on the way to the candidate position
+                    if direction_is_important:
+                        if any([self.occupancy_map[point[1]][point[0]] in [2, 3] for point in Parking.get_coords_within(figure_pos[0], figure_pos[1])]):
+                            continue       
+                    # for pedestrians trajectory check if there are no parking slots (1) or walls(3) on the way to the candidate position
+                    else:
+                        if any([self.occupancy_map[point[1]][point[0]] in [1, 3] for point in Parking.get_coords_within(figure_pos[0], figure_pos[1])]):
+                            continue
+                    if Parking.spaces_intersect(figure_pos, destination_coordinates):
+                        g = g_cost(cost[q][0])
+                        previous[candidate] = q
+                        cost[candidate] = (g, 0)
+                        closed_array.append(candidate)
+                        # add extra step to make medium point of the figure inside the destination figure
+                        if opposite_direction == 'SOUTH':
+                            pos = Parking.move_point_to_north(candidate, step)
+                        elif opposite_direction == 'NORTH':
+                            pos = Parking.move_point_to_south(candidate, step)
+                        elif opposite_direction == 'WEST':
+                            pos = Parking.move_point_to_east(candidate,  step)
+                        else:
+                            pos = Parking.move_point_to_west(candidate,  step)
+                        
+                        previous[pos] = candidate
+                        g = g_cost(g)
+                        cost[pos] = (g, 0)
+                        closed_array.append(pos)
+
+                        path = [pos]
+                        while pos != start:
+                            pos = previous[pos]
+                            path.append(pos)
+                        path.reverse()
+                        return path, g
+
+                    if self.space_is_free(figure_pos):
+                        if direction_is_important and opposite_direction in self.directions_map[q[1]][q[0]]:
+                            continue
+                        g = g_cost(cost[q][0])
+                        h = heuristic(candidate)
+                        
+                        if candidate not in open_array and candidate not in closed_array:
+                            open_array.append(candidate)
+                            cost[candidate] = (g, h)
+                            previous[candidate] = q
+                        else:
+                            if g + h < sum(cost[candidate]):
+                                previous[candidate] = q
+                                cost[candidate] = (g, h)
+
+                                if candidate in closed_array:
+                                    closed_array.remove(candidate)
+                                    open_array.append(candidate)  
             
-            # North 
-            neighbour_pos = [Parking.move_point_to_north(q, step), Parking.move_point_to_north((q[0] + figure_min_size, q[1] + figure_min_size), step)]
-            if self.valid_figure_position(neighbour_pos):
-                if Parking.spaces_intersect(neighbour_pos, destination_coordinates):
-                    closed_array[neighbour_pos[0]] = (g_cost(q_cost[0]), 0)
-                    parents[neighbour_pos[0]] = q
-                    open_array = {}
-                    goal_pos = neighbour_pos[0]
-                    break
-                if self.space_is_free(neighbour_pos):
-                    if direction_is_important:
-                        if self.directions_map[q[1]][q[0]] == 'SOUTH':
-                            neighbour_pos = None
-                    if neighbour_pos is not None:
-                        g = g_cost(q_cost[0])
-                        h = heuristic(neighbour_pos[0])
-                        if neighbour_pos[0] not in open_array.keys() and neighbour_pos[0] not in closed_array.keys():
-                            open_array[neighbour_pos[0]] = (g, h)
-                            parents[neighbour_pos[0]] = q
-                        elif neighbour_pos[0] in open_array.keys():
-                            if g + h < sum(open_array[neighbour_pos[0]]):
-                                open_array[neighbour_pos[0]] = (g, h)
-                                parents[neighbour_pos[0]] = q
-                        else:
-                            if g + h < sum(closed_array[neighbour_pos[0]]):
-                                open_array[neighbour_pos[0]] = (g, h)
-                                parents[neighbour_pos[0]] = q
-                        closed_array[q] = q_cost
-            
-            # South direction
-            neighbour_pos = [Parking.move_point_to_south(q, step), Parking.move_point_to_south((q[0] + figure_min_size, q[1] + figure_min_size), step)]
-            if self.valid_figure_position(neighbour_pos):
-                if Parking.spaces_intersect(neighbour_pos, destination_coordinates):
-                    closed_array[neighbour_pos[0]] = (g_cost(q_cost[0]), 0)
-                    parents[neighbour_pos[0]] = q
-                    open_array = {}
-                    goal_pos = neighbour_pos[0]
-                    break
-                if self.space_is_free(neighbour_pos):
-                    if direction_is_important:
-                        if self.directions_map[q[1]][q[0]] == 'NORTH':
-                            neighbour_pos = None
-                    if neighbour_pos is not None:
-                        g = g_cost(q_cost[0])
-                        h = heuristic(neighbour_pos[0])
-                        if neighbour_pos[0] not in open_array.keys() and neighbour_pos[0] not in closed_array.keys():
-                            open_array[neighbour_pos[0]] = (g, h)
-                            parents[neighbour_pos[0]] = q
-                        elif neighbour_pos[0] in open_array.keys():
-                            if g + h <  sum(open_array[neighbour_pos[0]]):
-                                open_array[neighbour_pos[0]] = (g, h)
-                                parents[neighbour_pos[0]] = q
-                        else:
-                            if g + h < sum(closed_array[neighbour_pos[0]]):
-                                open_array[neighbour_pos[0]] = (g, h)
-                                parents[neighbour_pos[0]] = q
-                        closed_array[q] = q_cost
-            # WEST
-            neighbour_pos = [Parking.move_point_to_west(q, step), Parking.move_point_to_west((q[0] + figure_min_size, q[1] + figure_min_size), step)]
-            if self.valid_figure_position(neighbour_pos):
-                if Parking.spaces_intersect(neighbour_pos, destination_coordinates):
-                    closed_array[neighbour_pos[0]] = (g_cost(q_cost[0]), 0)
-                    parents[neighbour_pos[0]] = q
-                    open_array = {}
-                    goal_pos = neighbour_pos[0]
-                    break
-                if self.space_is_free(neighbour_pos):
-                    if direction_is_important:
-                        if self.directions_map[q[1]][q[0]] == 'EAST':
-                            neighbour_pos = None
-                    if neighbour_pos is not None:
-                        g = g_cost(q_cost[0])
-                        h = heuristic(neighbour_pos[0])
-                        if neighbour_pos[0] not in open_array.keys() and neighbour_pos[0] not in closed_array.keys():
-                            open_array[neighbour_pos[0]] = (g, h)
-                            parents[neighbour_pos[0]] = q
-                        elif neighbour_pos[0] in open_array.keys():
-                            if g + h <  sum(open_array[neighbour_pos[0]]):
-                                open_array[neighbour_pos[0]] = (g, h)
-                                parents[neighbour_pos[0]] = q
-                        else:
-                            if g + h < sum(closed_array[neighbour_pos[0]]):
-                                open_array[neighbour_pos[0]] = (g, h)
-                                parents[neighbour_pos[0]] = q
-                        closed_array[q] = q_cost
-            # EAST
-            neighbour_pos = [Parking.move_point_to_east(q, step), Parking.move_point_to_east((q[0] + figure_min_size, q[1] + figure_min_size), step)]
-            if self.valid_figure_position(neighbour_pos):
-                if Parking.spaces_intersect(neighbour_pos, destination_coordinates):
-                    closed_array[neighbour_pos[0]] = (g_cost(q_cost[0]), 0)
-                    parents[neighbour_pos[0]] = q
-                    open_array = {}
-                    goal_pos = neighbour_pos[0]
-                    break
-                if self.space_is_free(neighbour_pos):
-                    if direction_is_important:
-                        if self.directions_map[q[1]][q[0]] == 'WEST':
-                            neighbour_pos = None
-                    if neighbour_pos is not None:
-                        g = g_cost(q_cost[0])
-                        h = heuristic(neighbour_pos[0])
-                        if neighbour_pos[0] not in open_array.keys() and neighbour_pos[0] not in closed_array.keys():
-                            open_array[neighbour_pos[0]] = (g, h)
-                            parents[neighbour_pos[0]] = q
-                        elif neighbour_pos[0] in open_array.keys():
-                            if g + h <  sum(open_array[neighbour_pos[0]]):
-                                open_array[neighbour_pos[0]] = (g, h)
-                                parents[neighbour_pos[0]] = q
-                        else:
-                            if g + h < sum(closed_array[neighbour_pos[0]]):
-                                open_array[neighbour_pos[0]] = (g, h)
-                                parents[neighbour_pos[0]] = q
-                        closed_array[q] = q_cost
-        if goal_pos is None:
-            print('Goal is unreached')
-            return None
-        pos = goal_pos
-        path = [(pos[0] + step, pos[1] + step)]
-        while pos != starting_pos[0]:
-            pos = parents[pos]
-            path.append((pos[0] + step, pos[1] + step))
-        return path, closed_array[goal_pos][0]                   
+
+        print('Goal is unreachable\n----')
+        return closed_array            
