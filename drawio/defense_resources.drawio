@@ -1,9 +1,92 @@
-<mxfile host="app.diagrams.net" modified="2023-09-27T21:33:30.837Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" version="21.8.2" etag="efGP4nfVEg8sMyAwqAw_" type="github">
+<mxfile host="app.diagrams.net" modified="2023-09-27T22:02:28.186Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" etag="l1UXUdbjw2Iw9H9t5vVy" version="21.8.2" type="github">
   <diagram name="Page-1" id="rJfB9M_8x0R6svB4_iCl">
-    <mxGraphModel>
+    <mxGraphModel dx="1900" dy="542" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
+        <mxCell id="sNQyNDppOcx34urlBobM-2" value="Вантажовідправник" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="480" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="sNQyNDppOcx34urlBobM-3" value="Працівник військової&lt;br&gt;&amp;nbsp;частини" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;" vertex="1" parent="1">
+          <mxGeometry x="380" y="540" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="sNQyNDppOcx34urlBobM-4" value="прецтавник &lt;br&gt;оперативного&lt;br&gt;&amp;nbsp;командування" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;" vertex="1" parent="1">
+          <mxGeometry x="450" y="340" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="sNQyNDppOcx34urlBobM-5" value="прецтавник ЗСУ" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;" vertex="1" parent="1">
+          <mxGeometry x="610" y="490" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="sNQyNDppOcx34urlBobM-10" value="передати військове майно" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="430" y="485" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="sNQyNDppOcx34urlBobM-23" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;" edge="1" parent="1" source="sNQyNDppOcx34urlBobM-14">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="360" y="260" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sNQyNDppOcx34urlBobM-14" value="передати за планом забезпечення війська" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="210" y="110" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="sNQyNDppOcx34urlBobM-15" value="начальник служби &lt;br&gt;управління військових&lt;br&gt;&amp;nbsp;рксурсів&amp;nbsp;" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;" vertex="1" parent="1">
+          <mxGeometry x="50" y="210" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="sNQyNDppOcx34urlBobM-16" value="працівник військової &lt;br&gt;частини" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;" vertex="1" parent="1">
+          <mxGeometry x="360" y="270" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="sNQyNDppOcx34urlBobM-20" value="передати за планом навчання" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="380" y="40" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="sNQyNDppOcx34urlBobM-21" value="передати за планом ремонту" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="540" y="200" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="sNQyNDppOcx34urlBobM-22" value="передати за планом проведення зборів" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="550" y="80" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="sNQyNDppOcx34urlBobM-24" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;" edge="1" parent="1" source="sNQyNDppOcx34urlBobM-20">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="380" y="250" as="targetPoint" />
+            <mxPoint x="313" y="188" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sNQyNDppOcx34urlBobM-25" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;exitX=0;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="sNQyNDppOcx34urlBobM-22">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="400" y="260" as="targetPoint" />
+            <mxPoint x="323" y="198" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sNQyNDppOcx34urlBobM-26" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;exitX=-0.014;exitY=0.651;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="sNQyNDppOcx34urlBobM-21">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="410" y="280" as="targetPoint" />
+            <mxPoint x="550" y="230" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sNQyNDppOcx34urlBobM-27" value="передати літальний апарат" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="30" y="80" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="sNQyNDppOcx34urlBobM-28" value="передати озброєння" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-180" y="220" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="sNQyNDppOcx34urlBobM-29" value="передати&amp;nbsp; військову техніку" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-130" y="110" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="sNQyNDppOcx34urlBobM-30" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="sNQyNDppOcx34urlBobM-27">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="80" y="190" as="targetPoint" />
+            <mxPoint x="313" y="188" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sNQyNDppOcx34urlBobM-31" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;exitX=0.774;exitY=0.937;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="sNQyNDppOcx34urlBobM-29">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="40" y="210" as="targetPoint" />
+            <mxPoint x="323" y="198" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sNQyNDppOcx34urlBobM-32" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;exitX=0.906;exitY=0.137;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="sNQyNDppOcx34urlBobM-28">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="40" y="240" as="targetPoint" />
+            <mxPoint x="313" y="188" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
