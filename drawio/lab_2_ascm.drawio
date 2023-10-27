@@ -1,9 +1,396 @@
-<mxfile host="app.diagrams.net" modified="2023-10-27T14:56:15.592Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" version="22.0.8" etag="4TvLiT_ULyx6sBCFdmZt" type="github">
+<mxfile host="app.diagrams.net" modified="2023-10-27T16:01:19.284Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" etag="RmU4B2KJKdkCN7IjOko9" version="22.0.8" type="github">
   <diagram name="Page-1" id="HLkTZx1MIagiYOGIade-">
-    <mxGraphModel>
+    <mxGraphModel dx="3000" dy="1549" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-55" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="cwMgrT9c-p1g1ShQn_tF-6" target="cwMgrT9c-p1g1ShQn_tF-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-6" value="a - ліва межа інтерполювання&lt;br&gt;b - права межа інтерполювання&amp;nbsp;&lt;br&gt;n - кількість інтервалів&lt;br&gt;f - функція" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
+          <mxGeometry x="160" y="170" width="260" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-56" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="cwMgrT9c-p1g1ShQn_tF-7" target="cwMgrT9c-p1g1ShQn_tF-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-7" value="h = (b - a)/n&lt;br&gt;polynoms_n = (n + 1) / 3&amp;nbsp;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="110" y="310" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-57" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="cwMgrT9c-p1g1ShQn_tF-8" target="cwMgrT9c-p1g1ShQn_tF-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-8" value="створити вектор x_arr, з a по b з кроком h&amp;nbsp;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="317.5" y="310" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-45" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="cwMgrT9c-p1g1ShQn_tF-23" target="cwMgrT9c-p1g1ShQn_tF-21">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="270" y="568" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-58" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="cwMgrT9c-p1g1ShQn_tF-9" target="cwMgrT9c-p1g1ShQn_tF-22">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-9" value="створити вектор y_arr - застосувати f до кожного елементу вектору" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="317.5" y="420" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-48" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="cwMgrT9c-p1g1ShQn_tF-10" target="cwMgrT9c-p1g1ShQn_tF-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-10" value="створити вектор dL,&lt;br&gt;j = -1,&lt;br&gt;i = 0" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="240" y="690" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-13" value="так" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="cwMgrT9c-p1g1ShQn_tF-11" target="cwMgrT9c-p1g1ShQn_tF-15">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="400" y="870" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="435" y="830" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-37" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="cwMgrT9c-p1g1ShQn_tF-11" target="cwMgrT9c-p1g1ShQn_tF-36">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-11" value="i &amp;lt; n+1?" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="260" y="790" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="cwMgrT9c-p1g1ShQn_tF-15" target="cwMgrT9c-p1g1ShQn_tF-19">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="360" y="960" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="370" y="920" />
+              <mxPoint x="370" y="1070" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-17" value="так" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="cwMgrT9c-p1g1ShQn_tF-15" target="cwMgrT9c-p1g1ShQn_tF-18">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="510" y="950" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-15" value="i % 3 == 0?" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="395" y="880" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="cwMgrT9c-p1g1ShQn_tF-18" target="cwMgrT9c-p1g1ShQn_tF-19">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="523" y="1070" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-18" value="j += 1" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="475" y="960" width="95" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="cwMgrT9c-p1g1ShQn_tF-19">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="447.5" y="1130" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-19" value="xs = x_arr[j]&amp;nbsp;&lt;br&gt;ys = y_arr[j]&amp;nbsp;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="387.5" y="1040" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-47" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.75;entryDx=0;entryDy=0;" edge="1" parent="1" source="cwMgrT9c-p1g1ShQn_tF-21" target="cwMgrT9c-p1g1ShQn_tF-10">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="465" y="735" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-21" value="Знайти M = max(f&#39;&#39;(etha)) на проміжку [a, b]&amp;nbsp;" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="355" y="525" width="85" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-43" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="cwMgrT9c-p1g1ShQn_tF-22" target="cwMgrT9c-p1g1ShQn_tF-23">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-22" value="x_arr = переформований вектор x_arr в розмірність polynoms_n x 3 по рядкам" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="95" y="420" width="175" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-23" value="y_arr = переформований вектор y_arr в розмірність polynoms_n x 3 по рядкам" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="95" y="530" width="175" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-86" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="cwMgrT9c-p1g1ShQn_tF-30" target="cwMgrT9c-p1g1ShQn_tF-85">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-30" value="похідна_у_вузлі = (2*x - xs[1] - xs[2])*ys[0] - 2*(2*x - xs[0] - xs[2])*ys[1] + (2*x - xs[0] - xs[1])*ys[2])/(2*h^2)" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="355" y="1230" width="205" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-31" value="x = xs[i % 3]" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="387.5" y="1130" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-51" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" target="cwMgrT9c-p1g1ShQn_tF-34">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="458" y="1450" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-52" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="cwMgrT9c-p1g1ShQn_tF-34" target="cwMgrT9c-p1g1ShQn_tF-35">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-34" value="додати в вектор dL похідну_у_вузлі + похибка_діференціювання" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="370" y="1490" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-53" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="cwMgrT9c-p1g1ShQn_tF-35">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="300" y="870" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-35" value="i +=&amp;nbsp; 1" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="420" y="1580" width="90" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-38" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="cwMgrT9c-p1g1ShQn_tF-36">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="209.70588235294122" y="960" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-36" value="повернути &lt;br&gt;вектор dL" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="170" y="880" width="80" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-39" value="кінець" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="170" y="960" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-49" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.462;entryY=0.019;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="cwMgrT9c-p1g1ShQn_tF-31" target="cwMgrT9c-p1g1ShQn_tF-30">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-79" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="cwMgrT9c-p1g1ShQn_tF-54" target="cwMgrT9c-p1g1ShQn_tF-59">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-54" value="обчислити M&amp;nbsp;" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="710" y="490" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-59" value="y_arr - вектор вузлів інтерполбвання&lt;br&gt;rate - порядок похідної&lt;br&gt;n - довжина y_arr" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
+          <mxGeometry x="660" y="600" width="180" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-77" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="cwMgrT9c-p1g1ShQn_tF-60">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="740" y="780" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-60" value="i = 0" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="690" y="690" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-63" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="cwMgrT9c-p1g1ShQn_tF-61" target="cwMgrT9c-p1g1ShQn_tF-64">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="840" y="860" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-80" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="cwMgrT9c-p1g1ShQn_tF-61">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="660" y="870" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-61" value="i &amp;lt; rate?" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="700" y="780" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-66" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="cwMgrT9c-p1g1ShQn_tF-64" target="cwMgrT9c-p1g1ShQn_tF-65">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-64" value="j = 0" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="790" y="860" width="70" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-67" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="cwMgrT9c-p1g1ShQn_tF-65">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1010" y="990" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-71" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="cwMgrT9c-p1g1ShQn_tF-65" target="cwMgrT9c-p1g1ShQn_tF-68">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-65" value="j &amp;lt; (n-1)?" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="890" y="900" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-68" value="y_temp += [ys[j + 1] - ys[j]" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="760" y="990" width="150" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-74" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="cwMgrT9c-p1g1ShQn_tF-69">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1020" y="880" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-69" value="y_arr = y_temp" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="960" y="990" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-73" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="cwMgrT9c-p1g1ShQn_tF-70" target="cwMgrT9c-p1g1ShQn_tF-65">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="825" y="1145" />
+              <mxPoint x="930" y="1145" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-70" value="j += 1" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="790" y="1075" width="70" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-72" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.659;entryY=0.054;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="cwMgrT9c-p1g1ShQn_tF-68" target="cwMgrT9c-p1g1ShQn_tF-70">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-76" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="cwMgrT9c-p1g1ShQn_tF-75" target="cwMgrT9c-p1g1ShQn_tF-61">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1020" y="780" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-75" value="i += 1" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="960" y="820" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-78" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.617;entryY=-0.036;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="cwMgrT9c-p1g1ShQn_tF-59" target="cwMgrT9c-p1g1ShQn_tF-60">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-83" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="cwMgrT9c-p1g1ShQn_tF-81" target="cwMgrT9c-p1g1ShQn_tF-82">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-81" value="M = max(|y_arr|)" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="610" y="875" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-82" value="кінець" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="630" y="960" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-85" value="&#xa;&lt;br style=&quot;border-color: var(--border-color); color: rgb(0, 0, 0); font-family: Helvetica; font-size: 12px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(251, 251, 251); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;&quot;&gt;&lt;span style=&quot;color: rgb(0, 0, 0); font-family: Helvetica; font-size: 12px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(251, 251, 251); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;&quot;&gt;похибка диференціювання = M * ((x - xs[1)(x - xs[2[) + (x-xs[0])(x - xs[2]) + (x - xs[0])(x - xs[1])) /factorial(3)&lt;/span&gt;&#xa;&#xa;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="350" y="1370" width="220" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-96" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="cwMgrT9c-p1g1ShQn_tF-87" target="cwMgrT9c-p1g1ShQn_tF-89">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-87" value="обчислити &lt;br&gt;інтеграл методом Сіпмпсона" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="1430" y="495" width="110" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-98" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="cwMgrT9c-p1g1ShQn_tF-88" target="cwMgrT9c-p1g1ShQn_tF-90">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-88" value="y_arr_1 = парні за індексом елементи у_arr (окрім першого елементу та останнього)" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1410" y="740" width="150" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-97" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="cwMgrT9c-p1g1ShQn_tF-89" target="cwMgrT9c-p1g1ShQn_tF-88">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-89" value="y_arr - значення f у вузлах інтерполювання&lt;br&gt;h - крок інтерполяції&lt;br&gt;a - ліва межа&lt;br&gt;b - права межа" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
+          <mxGeometry x="1375" y="630" width="220" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-99" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="cwMgrT9c-p1g1ShQn_tF-90" target="cwMgrT9c-p1g1ShQn_tF-91">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-90" value="&lt;br&gt;&lt;span style=&quot;color: rgb(0, 0, 0); font-family: Helvetica; font-size: 12px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(251, 251, 251); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;&quot;&gt;y_arr_2 = непарні за індексом елементи у_arr (окрім першого елементу та останнього)&lt;/span&gt;&lt;br&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1410" y="850" width="155" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-102" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="cwMgrT9c-p1g1ShQn_tF-91" target="cwMgrT9c-p1g1ShQn_tF-94">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-91" value="simpson = 4 * (y_arr[0] + 4*sum(y_arr_1) + 2*sum(y_arr_2) + y_arr[end]))/3" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1397.5" y="970" width="180" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-101" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="cwMgrT9c-p1g1ShQn_tF-92" target="cwMgrT9c-p1g1ShQn_tF-93">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-92" value="похибка = M * |b - a| / 180" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1415" y="1090" width="150" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-104" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="cwMgrT9c-p1g1ShQn_tF-93" target="cwMgrT9c-p1g1ShQn_tF-95">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-93" value="simpson += похибка" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1427.5" y="1190" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-103" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.75;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="cwMgrT9c-p1g1ShQn_tF-94" target="cwMgrT9c-p1g1ShQn_tF-92">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-94" value="обчислити M" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="1620" y="1030" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-95" value="кінець" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="1295" y="1180" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-119" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="cwMgrT9c-p1g1ShQn_tF-105" target="cwMgrT9c-p1g1ShQn_tF-108">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-105" value="оцінка інтегралу за рунге" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="1135" y="1540" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-124" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="cwMgrT9c-p1g1ShQn_tF-107" target="cwMgrT9c-p1g1ShQn_tF-116">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-107" value="I_1 = обчислити інтеграл метоом Сімпсона" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="1040" y="1850" width="110" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-120" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="cwMgrT9c-p1g1ShQn_tF-108" target="cwMgrT9c-p1g1ShQn_tF-109">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-108" value="a - ліва межа&lt;br&gt;b - права межа&lt;br&gt;f - функція&lt;br&gt;h - початковий крок&lt;br&gt;epsilon - точність&lt;br&gt;q = 4" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
+          <mxGeometry x="1090" y="1650" width="170" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-121" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="cwMgrT9c-p1g1ShQn_tF-109" target="cwMgrT9c-p1g1ShQn_tF-110">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-109" value="x_arr_1 - вектор з а по b з кроком h" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1040" y="1770" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-122" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="cwMgrT9c-p1g1ShQn_tF-110" target="cwMgrT9c-p1g1ShQn_tF-118">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-110" value="y_arr_1 - значення функції в точках вектору x_arr_1" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1195" y="1770" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-128" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="cwMgrT9c-p1g1ShQn_tF-111" target="cwMgrT9c-p1g1ShQn_tF-113">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-111" value="I_2 = обчислити інтеграл метоом Сімпсона" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="1255" y="2190" width="110" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-129" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="cwMgrT9c-p1g1ShQn_tF-113" target="cwMgrT9c-p1g1ShQn_tF-117">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-113" value="оцінка =|I_2 - I_1|/(2^q - 1)" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1075" y="2195" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-126" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="cwMgrT9c-p1g1ShQn_tF-114" target="cwMgrT9c-p1g1ShQn_tF-115">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-114" value="x_arr_2 - вектор з а по b з кроком h/2" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1060" y="2090" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-127" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="cwMgrT9c-p1g1ShQn_tF-115" target="cwMgrT9c-p1g1ShQn_tF-111">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-115" value="y_arr_2 - значення функції в точках вектору x_arr_2" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1255" y="2090" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-125" value="так" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="cwMgrT9c-p1g1ShQn_tF-116" target="cwMgrT9c-p1g1ShQn_tF-114">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1150" y="2040" />
+              <mxPoint x="1150" y="2050" />
+              <mxPoint x="1120" y="2050" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-131" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="cwMgrT9c-p1g1ShQn_tF-116">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1310" y="2039.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-116" value="оцінка &amp;lt; epsilon?" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1170" y="2000" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-130" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="cwMgrT9c-p1g1ShQn_tF-117" target="cwMgrT9c-p1g1ShQn_tF-116">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1400" y="2320" />
+              <mxPoint x="1400" y="1980" />
+              <mxPoint x="1230" y="1980" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-117" value="h /= 2&lt;br&gt;y_arr_1 = y_arr_2&lt;br&gt;I_1 = I_2" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1075" y="2290" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-123" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="cwMgrT9c-p1g1ShQn_tF-118" target="cwMgrT9c-p1g1ShQn_tF-107">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-118" value="оцінка = epsilon + 1" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1200" y="1875" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="cwMgrT9c-p1g1ShQn_tF-132" value="кінець" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="1315" y="2010" width="60" height="60" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
