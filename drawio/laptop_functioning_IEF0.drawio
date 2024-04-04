@@ -1,0 +1,294 @@
+<mxfile host="app.diagrams.net" modified="2024-04-04T14:12:45.300Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36" etag="4xkh0jpaGPD1M4E9jEcE" version="24.2.0" type="github">
+  <diagram name="Page-1" id="XvvfjQK3vHqN5oyYVeZJ">
+    <mxGraphModel dx="1122" dy="491" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-88" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="xynN1DV7xF-PApxHEvJ0-1" target="xynN1DV7xF-PApxHEvJ0-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-1" value="використовувати ноутбук" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="360" y="260" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-84" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" edge="1" parent="1" source="xynN1DV7xF-PApxHEvJ0-3" target="xynN1DV7xF-PApxHEvJ0-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-3" value="вхідні дані" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="220" y="260" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-4" value="вихідні дані" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="560" y="275" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-85" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="xynN1DV7xF-PApxHEvJ0-5" target="xynN1DV7xF-PApxHEvJ0-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-5" value="базова комп&#39;ютерна грамотність" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="350" y="170" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-86" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.25;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="xynN1DV7xF-PApxHEvJ0-6" target="xynN1DV7xF-PApxHEvJ0-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-6" value="ноутбук" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="350" y="370" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-87" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.75;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="xynN1DV7xF-PApxHEvJ0-7" target="xynN1DV7xF-PApxHEvJ0-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-7" value="користувач" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="425" y="370" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-8" value="&lt;ul&gt;&lt;li style=&quot;text-align: left;&quot;&gt;задача: побудувати діаграму функціонування ноутбука&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;точка зору: користувач&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;кінцевий результат: вихідні дані роботи з ноутбуком&lt;/li&gt;&lt;/ul&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry y="80" width="290" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="xynN1DV7xF-PApxHEvJ0-9" target="xynN1DV7xF-PApxHEvJ0-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-9" value="ввімкнути ноутбук" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="290" y="540" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-47" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="xynN1DV7xF-PApxHEvJ0-10" target="xynN1DV7xF-PApxHEvJ0-28">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-10" value="завантажити BIOS/UEFI" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="450" y="640" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="xynN1DV7xF-PApxHEvJ0-11" target="xynN1DV7xF-PApxHEvJ0-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-11" value="натиснути кнопку живлення" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="180" y="535" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="xynN1DV7xF-PApxHEvJ0-13" target="xynN1DV7xF-PApxHEvJ0-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-13" value="заряджена батарея" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="280" y="460" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="xynN1DV7xF-PApxHEvJ0-14" target="xynN1DV7xF-PApxHEvJ0-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-14" value="ноутбук" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="270" y="670" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-23" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="xynN1DV7xF-PApxHEvJ0-20" target="xynN1DV7xF-PApxHEvJ0-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-20" value="BIOS/UEFI" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="440" y="750" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="xynN1DV7xF-PApxHEvJ0-21" target="xynN1DV7xF-PApxHEvJ0-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-21" value="ROM" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="510" y="750" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="xynN1DV7xF-PApxHEvJ0-22" target="xynN1DV7xF-PApxHEvJ0-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-22" value="RAM" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="480" y="790" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-27" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.75;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="xynN1DV7xF-PApxHEvJ0-26" target="xynN1DV7xF-PApxHEvJ0-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-26" value="користувач" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="350" y="670" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-49" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="xynN1DV7xF-PApxHEvJ0-28" target="xynN1DV7xF-PApxHEvJ0-48">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-28" value="провести перевірку фізичних компонент (POST теcт)" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="640" y="700" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-34" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.75;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="xynN1DV7xF-PApxHEvJ0-33" target="xynN1DV7xF-PApxHEvJ0-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-33" value="CPU" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="550" y="750" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-44" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="xynN1DV7xF-PApxHEvJ0-37" target="xynN1DV7xF-PApxHEvJ0-28">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-37" value="процесори" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="720" y="820" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-38" value="RAM (оперативна пам&#39;ять)" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="760" y="880" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-42" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.25;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="xynN1DV7xF-PApxHEvJ0-39" target="xynN1DV7xF-PApxHEvJ0-28">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-39" value="пристрій керування курсором" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="560" y="880" width="100" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-40" value="SSD/HDD (накопичувач)" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="700" y="940" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-41" value="клавіатура" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="660" y="870" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-43" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.405;entryY=1.013;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="xynN1DV7xF-PApxHEvJ0-41" target="xynN1DV7xF-PApxHEvJ0-28">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-45" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.776;entryY=1.07;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="xynN1DV7xF-PApxHEvJ0-38" target="xynN1DV7xF-PApxHEvJ0-28">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-46" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.611;entryY=1.005;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="xynN1DV7xF-PApxHEvJ0-40" target="xynN1DV7xF-PApxHEvJ0-28">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-68" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="xynN1DV7xF-PApxHEvJ0-48" target="xynN1DV7xF-PApxHEvJ0-61">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-48" value="завантажити ОС" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="860" y="745" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-51" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="xynN1DV7xF-PApxHEvJ0-50" target="xynN1DV7xF-PApxHEvJ0-48">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-50" value="MBR/GPT&amp;nbsp;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="850" y="860" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-53" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="xynN1DV7xF-PApxHEvJ0-52" target="xynN1DV7xF-PApxHEvJ0-48">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-52" value="SSD/HDD (накопичувач)" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="920" y="950" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-56" value="RAM (оперативна пам&#39;ять)" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="970" y="860" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-57" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.621;entryY=0.987;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="xynN1DV7xF-PApxHEvJ0-56" target="xynN1DV7xF-PApxHEvJ0-48">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-59" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="xynN1DV7xF-PApxHEvJ0-58" target="xynN1DV7xF-PApxHEvJ0-48">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-58" value="bootloader" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="830" y="990" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-60" value="device drivers" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="1070" y="920" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-70" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="xynN1DV7xF-PApxHEvJ0-61" target="xynN1DV7xF-PApxHEvJ0-69">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-61" value="конфігурувати систему" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1100" y="810" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-65" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="xynN1DV7xF-PApxHEvJ0-62" target="xynN1DV7xF-PApxHEvJ0-61">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-62" value="SSD/HDD (накопичувач)" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="1100" y="990" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-66" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="xynN1DV7xF-PApxHEvJ0-63" target="xynN1DV7xF-PApxHEvJ0-61">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-63" value="RAM (оперативна пам&#39;ять)" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="1170" y="930" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-64" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.184;entryY=1.034;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="xynN1DV7xF-PApxHEvJ0-60" target="xynN1DV7xF-PApxHEvJ0-61">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-76" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="xynN1DV7xF-PApxHEvJ0-69" target="xynN1DV7xF-PApxHEvJ0-75">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-69" value="завантажити системні&amp;nbsp;&lt;div&gt;застосунки&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1290" y="870" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-71" value="антивірус" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="1260" y="1020" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-74" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.75;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="xynN1DV7xF-PApxHEvJ0-72" target="xynN1DV7xF-PApxHEvJ0-69">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-72" value="system volume" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="1350" y="1000" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-73" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.178;entryY=0.982;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="xynN1DV7xF-PApxHEvJ0-71" target="xynN1DV7xF-PApxHEvJ0-69">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-75" value="ідентифікувати користувача" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1470" y="925" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-78" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="xynN1DV7xF-PApxHEvJ0-77" target="xynN1DV7xF-PApxHEvJ0-75">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-77" value="інтерфейс ОС" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="1460" y="1030" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-80" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="xynN1DV7xF-PApxHEvJ0-79" target="xynN1DV7xF-PApxHEvJ0-75">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-79" value="користувач" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="1530" y="1030" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-83" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;Booting process&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="660" y="560" width="220" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-104" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="xynN1DV7xF-PApxHEvJ0-89" target="xynN1DV7xF-PApxHEvJ0-90">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-89" value="&quot;взути&quot; ноутбук" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="810" y="305" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-105" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="xynN1DV7xF-PApxHEvJ0-90" target="xynN1DV7xF-PApxHEvJ0-106">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1190" y="384.6521739130435" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-90" value="експлуатувати ноутбук" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1020" y="355" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-102" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="xynN1DV7xF-PApxHEvJ0-91" target="xynN1DV7xF-PApxHEvJ0-89">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-91" value="ввімкнути&amp;nbsp;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="680" y="320" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-101" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="xynN1DV7xF-PApxHEvJ0-93" target="xynN1DV7xF-PApxHEvJ0-90">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-93" value="базова комп&#39;ютерна грамотність" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="1035" y="270" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-96" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="xynN1DV7xF-PApxHEvJ0-94" target="xynN1DV7xF-PApxHEvJ0-89">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="950" y="450" />
+              <mxPoint x="870" y="450" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-99" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.25;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="xynN1DV7xF-PApxHEvJ0-94" target="xynN1DV7xF-PApxHEvJ0-90">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="950" y="440" />
+              <mxPoint x="1040" y="440" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-94" value="ноутбук" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="920" y="500" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-95" value="користувач" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="1010" y="500" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-97" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.58;entryY=0.997;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="xynN1DV7xF-PApxHEvJ0-95" target="xynN1DV7xF-PApxHEvJ0-90">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1040" y="450" />
+              <mxPoint x="1080" y="450" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-98" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.653;entryY=0.973;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="xynN1DV7xF-PApxHEvJ0-95" target="xynN1DV7xF-PApxHEvJ0-89">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xynN1DV7xF-PApxHEvJ0-106" value="вихідні дані" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="1160" y="369.6521739130435" width="60" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
