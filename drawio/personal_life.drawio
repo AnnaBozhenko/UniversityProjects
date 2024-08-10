@@ -1,9 +1,143 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36" version="24.7.6">
   <diagram name="Page-1" id="9Y1UYzm2Ubu2dyf3ZEOu">
-    <mxGraphModel>
+    <mxGraphModel dx="1000" dy="505" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
+        <mxCell id="Vy-MOCpVRqvXMaSpxSgn-35" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;entryX=0;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" target="Vy-MOCpVRqvXMaSpxSgn-32">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="440" y="350" as="sourcePoint" />
+            <mxPoint x="790" y="440" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Vy-MOCpVRqvXMaSpxSgn-38" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;entryX=0.408;entryY=1.077;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" target="Vy-MOCpVRqvXMaSpxSgn-36">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="430" y="340" as="sourcePoint" />
+            <mxPoint x="383" y="200" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Vy-MOCpVRqvXMaSpxSgn-30" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="450" y="380" as="sourcePoint" />
+            <mxPoint x="770" y="420" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Vy-MOCpVRqvXMaSpxSgn-24" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="420" y="440" as="sourcePoint" />
+            <mxPoint x="610" y="610" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Vy-MOCpVRqvXMaSpxSgn-20" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;" edge="1" parent="1" target="Vy-MOCpVRqvXMaSpxSgn-19">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="400" y="400" as="sourcePoint" />
+            <mxPoint x="210" y="430" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Vy-MOCpVRqvXMaSpxSgn-13" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="380" y="380" as="sourcePoint" />
+            <mxPoint x="120" y="220" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Vy-MOCpVRqvXMaSpxSgn-6" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;" edge="1" parent="1" target="Vy-MOCpVRqvXMaSpxSgn-5">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="420" y="330" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Vy-MOCpVRqvXMaSpxSgn-1" value="Me" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="395" y="340" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Vy-MOCpVRqvXMaSpxSgn-4" value="Develop BA&#39;s diploma thesis" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="350" y="250" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Vy-MOCpVRqvXMaSpxSgn-5" value="Acquire BA degree in applied mathematics" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="305" y="140" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="Vy-MOCpVRqvXMaSpxSgn-8" value="Become a Machine Learning engineer" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="60" y="170" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Vy-MOCpVRqvXMaSpxSgn-9" value="Become a Python developer" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="240" y="290" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Vy-MOCpVRqvXMaSpxSgn-10" value="Become a technical writer" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="280" y="340" width="100" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Vy-MOCpVRqvXMaSpxSgn-11" value="Become a data analytic" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="170" y="230" width="90" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Vy-MOCpVRqvXMaSpxSgn-16" value="Move to Kyiv" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="140" y="410" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Vy-MOCpVRqvXMaSpxSgn-17" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="390" y="390" as="sourcePoint" />
+            <mxPoint x="200" y="420" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Vy-MOCpVRqvXMaSpxSgn-18" value="Have rented appartment" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="240" y="450" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Vy-MOCpVRqvXMaSpxSgn-19" value="Have my own appartment" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="100" y="525" width="90" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="Vy-MOCpVRqvXMaSpxSgn-21" value="Do running daily" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="365" y="560" width="85" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Vy-MOCpVRqvXMaSpxSgn-22" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="410" y="430" as="sourcePoint" />
+            <mxPoint x="410" y="550" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Vy-MOCpVRqvXMaSpxSgn-23" value="Get involved in hackatons, competitions, projects, startups, conferences" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="580" y="620" width="140" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="Vy-MOCpVRqvXMaSpxSgn-25" value="Find professional community" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="470" y="442.5" width="100" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="Vy-MOCpVRqvXMaSpxSgn-26" value="Grow social network" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="510" y="525" width="110" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="Vy-MOCpVRqvXMaSpxSgn-27" value="Buy a biciycle" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="500" y="360" width="90" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Vy-MOCpVRqvXMaSpxSgn-28" value="Master bicycle riding" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="640" y="370" width="80" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="Vy-MOCpVRqvXMaSpxSgn-29" value="Do bycicle trips in Ukraine and abroad" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="780" y="410" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="Vy-MOCpVRqvXMaSpxSgn-31" value="master twerking" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="590" y="260" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Vy-MOCpVRqvXMaSpxSgn-32" value="find a sexual partner" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="690" y="190" width="110" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Vy-MOCpVRqvXMaSpxSgn-33" value="at least 1 long-term travel yearly (week), visit Ukrainian festivals, go on weekends to Ukrainian towns" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="700" y="270" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="Vy-MOCpVRqvXMaSpxSgn-34" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="450" y="360" as="sourcePoint" />
+            <mxPoint x="690" y="310" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Vy-MOCpVRqvXMaSpxSgn-36" value="Afford beauty service, like cometholist, depilation, dermathologist" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="510" y="95" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="Vy-MOCpVRqvXMaSpxSgn-37" value="Afford medical care, like dentist, gynecologist" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="445" y="190" width="135" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="Vy-MOCpVRqvXMaSpxSgn-39" value="Have stylish look, like clothes, accessories, heaircut" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="740" y="90" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Vy-MOCpVRqvXMaSpxSgn-40" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="450" y="340" as="sourcePoint" />
+            <mxPoint x="730" y="150" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
